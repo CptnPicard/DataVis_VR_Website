@@ -26,15 +26,7 @@
   $('#stuck_container').tmStickUp({});
 });
 </script>
-<!--[if lt IE 9]>
- <div style=' clear: both; text-align:center; position: relative;'>
-   <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-     <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
-   </a>
-</div>
-<script src="js/html5shiv.js"></script>
-<link rel="stylesheet" media="screen" href="css/ie.css">
-<![endif]-->
+
 </head>
 <body id="top">
 <!--==============================
@@ -59,7 +51,7 @@
                <li class="current"><a href="index.html">Tutorial</a></li>
                <li><a href="downloads.html">Downloads</a></li>
                <li><a href="helpfullinks.html">Helpful Links</a></li>
-			   <li><a href="about.html">About</a></li>
+               <li><a href="about.html">About</a></li>
              </ul>
             </nav>
             <div class="clear"></div>
@@ -80,12 +72,12 @@
       </div>
 	</div>
 	<div class="grid_12">
-	<h5>8.1 Creating Axis</h5>
-		Before we can visualize the actual data, we should create some axis for our coordinate system. We will write another C# script, that is able to spawn some GameObjects to represent axis and labels.<br/>
-		<div class="sbo"><strong>1:</strong> creat a new C# script in the "Scripts" folder &#8594; name it "Axis" &#8594; attach it to the GameObject “Data Manager” </div><br />
-		The "Axis.cs" script provides the function <code>SpawnCoSystem</code> that will create axis and labels for the xy-, xz- and yz-plane. The function takes an integer for the maximum number of axis per plane and three elements out of the <code>dataSetLabels</code> list from the "DataSet.cs" script. The three elements define, which row in our dataset should be visualized in which dimension.
-		The function <code>SpawnCoSystem</code> is calling <code>ScaleAxis</code>, to map the values in a row of our dataset to a relativ position value between 0 and 1. 
-		these position values are passed to the function <code>SpawnAxis</code>, that is called several times for each plane in the coordinate system. <code>SpawnAxis</code> creates a new GameObject and change its position and shape on a way, that it looks like an axis line. The function takes three parameters to define in what direction, in which plane and where a new axis should get created. A fourth string parameter is required to call the function <code>AddTextMesh</code> after creating an axis. <code>AddTextMesh</code> will create a TextMesh GameObject with the given string, representing the label of the axis.  
+	<h5>8.1 Creating Axes</h5>
+		Before we can visualize the actual data we should create some axis for our coordinate system. We will write another C# script, that is able to spawn some GameObjects to represent axis and labels.<br/>
+		<div class="sbo"><strong>1:</strong> create a new C# script in the "Scripts" folder &#8594; name it "Axis" &#8594; attach it to the GameObject “Data Manager” </div><br />
+		The "Axis.cs" script provides the function <code>SpawnCoSystem</code> that will create axis and labels for the xy-, xz- and yz-plane. The function takes an integer for the maximum number of axis per plane and three elements out of the <code>dataSetLabels</code> list from the "DataSet.cs" script. The three elements define which row in our dataset should be visualized in which dimension.
+		The function <code>SpawnCoSystem</code> is calling <code>ScaleAxis</code> to map the values in a row of our dataset to a relative position value between 0 and 1. 
+		These position values are passed to the function <code>SpawnAxis</code>, that is called several times for each plane in the coordinate system. <code>SpawnAxis</code> creates a new GameObject and change its position and shape in a way that it looks like an axis line. The functnon takes three parameters to define in what direction, in which plane and where a new axis should be created. A fourth string parameter is required to call the function <code>AddTextMesh</code> after creating an axis. <code>AddTextMesh</code> will create a TextMesh GameObject with the given string, representing the label of the axis.  
 
 							<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;max-width:800px ;max-height:500px;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008000; font-weight: bold">using</span> <span style="color: #0000FF; font-weight: bold">System.Collections</span>;
 			<span style="color: #008000; font-weight: bold">using</span> <span style="color: #0000FF; font-weight: bold">System.Collections.Generic</span>;
@@ -160,13 +152,13 @@
 
 				}
 
-				<span style="color: #408080; font-style: italic">//funtion SpawnAxis</span>
-				<span style="color: #408080; font-style: italic">//creat one GameObject, that represents an axis and one GameObject by calling AddTextMesh</span>
+				<span style="color: #408080; font-style: italic">//function SpawnAxis</span>
+				<span style="color: #408080; font-style: italic">//create one GameObject that represents an axis and one GameObject by calling AddTextMesh</span>
 				<span style="color: #408080; font-style: italic">//the orientation is given through the string coordinate, the position through the</span>
 				<span style="color: #408080; font-style: italic">//string plane and the float position. </span>
 				<span style="color: #008000; font-weight: bold">public</span> <span style="color: #008000; font-weight: bold">void</span> <span style="color: #0000FF">SpawnAxis</span>(<span style="color: #B00040">string</span> coordinate, <span style="color: #B00040">string</span> plane, <span style="color: #B00040">float</span> position, <span style="color: #B00040">string</span> label)
 				{
-					<span style="color: #408080; font-style: italic">//creat a new GameObject axis, name and tag it</span>
+					<span style="color: #408080; font-style: italic">//create a new GameObject axis, name and tag it</span>
 					GameObject Axis = GameObject.CreatePrimitive(PrimitiveType.Cube);
 					Axis.transform.name = <span style="color: #BA2121">&quot;Axis&quot;</span>;
 					Axis.tag = <span style="color: #BA2121">&quot;Axis&quot;</span>;
@@ -230,8 +222,8 @@
 
 				<span style="color: #408080; font-style: italic">//funtion ScaleAxis:</span>
 				<span style="color: #408080; font-style: italic">//the function takes a list of labels and length for a axis</span>
-				<span style="color: #408080; font-style: italic">//a dictionary links each label with a spcific value betwen 0 and 1</span>
-				<span style="color: #408080; font-style: italic">//the function returns a dicionary that contains the links</span>
+				<span style="color: #408080; font-style: italic">//a dictionary links each label with a specific value betwen 0 and 1</span>
+				<span style="color: #408080; font-style: italic">//the function returns a dictionary that contains the links</span>
 				<span style="color: #008000; font-weight: bold">public</span> Dictionary&lt;<span style="color: #B00040">string</span>, <span style="color: #B00040">float</span>&gt; ScaleAxis(<span style="color: #B00040">string</span> label)
 				{
 					Dictionary&lt;<span style="color: #B00040">string</span>, <span style="color: #B00040">float</span>&gt; scale = <span style="color: #008000; font-weight: bold">new</span> Dictionary&lt;<span style="color: #B00040">string</span>, <span style="color: #B00040">float</span>&gt;();
@@ -270,7 +262,7 @@
 					label.name = <span style="color: #BA2121">&quot;label&quot;</span>;
 					<span style="color: #B00040">var</span> textMesh = label.AddComponent&lt;TextMesh&gt;();
 
-					<span style="color: #408080; font-style: italic">// defining the position and orientation relativ to the given parent</span>
+					<span style="color: #408080; font-style: italic">// defining the position and orientation relative to the given parent</span>
 					textMesh.transform.localRotation = Quaternion.Euler(<span style="color: #666666">0</span>, rotationY, <span style="color: #666666">0</span>);
 					textMesh.anchor = anchor;
 					textMesh.transform.parent = parent.transform;
@@ -311,9 +303,9 @@
 
 
 
-		To enable the functionality of the axis script, we have to refer an <code>DataSet</code> instance of our DataSet.cs script to the public variable <code>dataSet</code> in the "Axis.cs" script. This can be done by:<br/>
+		To enable the functionality of the axis script we have to refer an <code>DataSet</code> instance of our DataSet.cs script to the public variable <code>dataSet</code> in the "Axis.cs" script. This can be done by:<br/>
 		<div class="sbo"><strong>2:</strong> open the Data Manager GameObject in the inspector  &#8594; drag and drop “Data Manager” from the Hierarchy into the Data Set field within the Axis (Script) component </div><br/>
-		We should test, if the axis script is running well. We will add a new <code>Start</code> function, where we call the <code>SpawnCoSystem</code> function with some elements from the <code>dataSetLabels</code> list, which are the strings from the first line of our dataset.txt file. <br/>
+		We should test if the axis script is running well. We will add a new <code>Start</code> function, where we call the <code>SpawnCoSystem</code> function with some elements from the <code>dataSetLabels</code> list, which are the strings from the first line of our dataset.txt file. <br/>
 		<div class="sbo"><strong>3:</strong> add the Start function to the Axis script &#8594; press the play button &#8594; delete the Start function again</div><br/>
 		 
 				<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;max-width:800px ;max-height:500px;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">  <span style="color: #008000; font-weight: bold">void</span> <span style="color: #0000FF">Start</span>()

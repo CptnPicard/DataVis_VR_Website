@@ -26,15 +26,7 @@
   $('#stuck_container').tmStickUp({});
 });
 </script>
-<!--[if lt IE 9]>
- <div style=' clear: both; text-align:center; position: relative;'>
-   <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-     <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
-   </a>
-</div>
-<script src="js/html5shiv.js"></script>
-<link rel="stylesheet" media="screen" href="css/ie.css">
-<![endif]-->
+
 </head>
 <body id="top">
 <!--==============================
@@ -81,11 +73,11 @@
 	</div>
 	<div class="grid_12">
 	<h5>9.1 Plot Data</h5>
-		Now, we want to plot the values from our dataset. We will write a C# script, that spawns sphecical GameObjects as representation of points into our coordinate system.<br/>
-		<div class="sbo"><strong>1:</strong> creat a new C# script in the "Scripts" folder &#8594; name it "PlotData" &#8594; attach it to the GameObject “Data Manager” </div><br/>
-		The "PlotData.cs" script takes a reference to the DataSet and Axis component. It contains an Update function, that is called by Unity once every frame. The <code>Update</code> function will call <code>PlotNewData</code>, when the public boolen <code>newplot</code> is true. The <code>PlotNewData</code> function takes three string elements, telling the function, which row to plot on which axis. The three strings must be elements of <code>dataSetLabels</code>. The function will first look for any existing axis or data point in our scene and delete it. This is done by a Unity builtin function <code>FindGameObjectsWithTag</code> but we have to set up these tags first. <br/>
+		Now we want to plot the values from our dataset. We will write a C# script, that spawns sphecical GameObjects as representation of points into our coordinate system.<br/>
+		<div class="sbo"><strong>1:</strong> create a new C# script in the "Scripts" folder &#8594; name it "PlotData" &#8594; attach it to the GameObject “Data Manager” </div><br/>
+		The "PlotData.cs" script takes a reference to the DataSet and Axis component. It contains an Update function, that is called by Unity once every frame. The <code>Update</code> function will call <code>PlotNewData</code>, when the public boolean <code>newplot</code> is true. The <code>PlotNewData</code> function takes three string elements, telling the function which row to plot on which axis. The three strings must be elements of <code>dataSetLabels</code>. The function will first look for any existing axis or data point in our scene and delete it. This is done by a Unity builtin function <code>FindGameObjectsWithTag</code> but we have to set up these tags first. <br/>
 		<div class="sbo"><strong>2:</strong> open the Inspector  &#8594; open the Tag dropdown menu in the top &#8594; click on <strong>Add Tag…</strong> &#8594; click on <strong>+</strong>  &#8594; write in “Axis” &#8594; click + again &#8594; write in “datapoint” </div><br/>
-		After destroying all “old” GameObjects, the function is calling <code>SpawnCoSystem</code> to create new axis.  A relative position for each element in the <code>listDataPoints</code> list gets then defined through the axis dictionaries, that store the relativ scale information. Finally the <code>SpawnDataPoint</code> function is called for each element in the list <code>listDataPoints</code>. The function <code>SpawnDataPoint</code> spawns a GameObject Sphere as a child of the GameObject “Coordinate System” at a given position.
+		After destroying all “old” GameObjects, the function is calling <code>SpawnCoSystem</code> to create new axis.  A relative position for each element in the <code>listDataPoints</code> list is then defined through the axis dictionaries that store the relative scale information. Finally the <code>SpawnDataPoint</code> function is called for each element in the list <code>listDataPoints</code>. The function <code>SpawnDataPoint</code> spawns a GameObject Sphere as a child of the GameObject “Coordinate System” at a given position.
 
 			<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;max-width:800px ;max-height:500px;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008000; font-weight: bold">using</span> <span style="color: #0000FF; font-weight: bold">System.Collections</span>;
 			<span style="color: #008000; font-weight: bold">using</span> <span style="color: #0000FF; font-weight: bold">System.Collections.Generic</span>;
@@ -115,7 +107,7 @@
 
 				<span style="color: #408080; font-style: italic">//function PlotNewData:</span>
 				<span style="color: #408080; font-style: italic">//delete all GameObject with the tag Axis and datapoint</span>
-				<span style="color: #408080; font-style: italic">//calls SpawnCoSystem to creat a new axis</span>
+				<span style="color: #408080; font-style: italic">//calls SpawnCoSystem to create a new axis</span>
 				<span style="color: #408080; font-style: italic">//calls SpawnDataPoint for each element in listDataPoints</span>
 				<span style="color: #008000; font-weight: bold">void</span> <span style="color: #0000FF">PlotNewData</span>(<span style="color: #B00040">string</span> xAxis, <span style="color: #B00040">string</span> yAxis, <span style="color: #B00040">string</span> zAxis)
 				{
@@ -132,7 +124,7 @@
 					}
 
 
-					<span style="color: #408080; font-style: italic">//call SpawnCOSystem to creat Axis and set axis.Dict</span>
+					<span style="color: #408080; font-style: italic">//call SpawnCOSystem to create Axis and set axis.Dict</span>
 					axis.SpawnCoSystem(<span style="color: #666666">20</span>, xAxis, yAxis, zAxis);
 
 					<span style="color: #008000; font-weight: bold">foreach</span> (DataPoint dat <span style="color: #008000; font-weight: bold">in</span> dataSet.listDataPoints)
@@ -169,7 +161,7 @@
 
 
 
-		We now can test the script and do some plots.<br/>
+		We can now test the script and create plots.<br/>
 		<div class="sbo"><strong>3:</strong> open “Data Manager” in the inspector &#8594; drag and drop “Data Manager” form the Hierarchy into DataSet and Axis within the Plot Data (Script component) </div><br/>
 		<div class="sbo"><strong>4:</strong> press the play button &#8594; open “Data Manager” in the inspector &#8594; change the Axis values in the Plot Data component to “Year”, “Global_Sales”, “Platform”  &#8594; click Newplot </div><br/>
 

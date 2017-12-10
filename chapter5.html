@@ -26,15 +26,7 @@
   $('#stuck_container').tmStickUp({});
 });
 </script>
-<!--[if lt IE 9]>
- <div style=' clear: both; text-align:center; position: relative;'>
-   <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-     <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
-   </a>
-</div>
-<script src="js/html5shiv.js"></script>
-<link rel="stylesheet" media="screen" href="css/ie.css">
-<![endif]-->
+
 </head>
 <body id="top">
 <!--==============================
@@ -84,18 +76,18 @@
 	 <div class="grid_12">
 
 		<h5>5.1 Create an Environment</h5>
-		As a first step, we want to set up a room, in which we can present our data later. We will keep it simple and create a room out of two walls and a floor.
+		As a first step we want to set up a room in which we can present our data later. We will keep it simple and create a room out of two walls and a floor.
 		To begin, we will save our scene in the "Assets" folder and create a new GameObject. <br/>
-		<div class="sbo"><strong>1:</strong> click <strong>File</strong> &#8594; <strong>Save Scene</strong> &#8594; creat a new folder "Scenes" &#8594; save the scene as “scene1” in the new folder</div> </li><br />
-		<div class="sbo"><strong>2:</strong> right click on Hierarchy window &#8594; click <strong>Create Empty</strong> &#8594; right click on "GameObject" &#8594; <strong>Rename</strong> &#8594; name it "Environment"</div>  <br/>
-		“Environment” is a so called Empty GameObject. You can't see it in the scene or game window. We just use it to organize our project. GameObjects can become a child of other GameObjects by attaching them in the Hierarchy. The child of a GameObject will get a local position and a local scale relative to its parent. We want to attach some children to the “Environment” object soon. We should reset the position and scale attribute of the parent to ensure, that the children are not getting deformed by these attributes. Attributes of GameObjects can be changed in the Inspector. <br/>
+		<div class="sbo"><strong>1:</strong> click <strong>File</strong> &#8594; <strong>Save Scene</strong> &#8594; create a new folder "Scenes" &#8594; save the scene as “scene1” in the new folder</div> </li><br />
+		<div class="sbo"><strong>2:</strong> right-click on Hierarchy window &#8594; click <strong>Create Empty</strong> &#8594; right-click on "GameObject" &#8594; <strong>Rename</strong> &#8594; name it "Environment"</div>  <br/>
+		“Environment” is a so called Empty GameObject. You can't see it in the scene or game window. We just use it to organize our project. GameObjects can become a child of other GameObjects by attaching them in the Hierarchy. The child of a GameObject will get a local position and a local scale relative to its parent. We want to attach some children to the “Environment” object soon. We should reset the position and scale attribute of the parent to ensure that the children are not getting deformed by these attributes. Attributes of GameObjects can be changed in the Inspector. <br/>
 		<div class="sbo"><strong>3:</strong> click on “Environment” in the Hierarchy &#8594; open the Inspector &#8594; click the gear icon under Transform &#8594; <strong>Reset</strong></div> <br/>
 		Our room should get a floor. To structure our project, we want “Floor” to be a child of “Environment” <br/>
 		<div class="sbo"><strong>4:</strong> right click on Hierarchy window &#8594; <strong>3D Object</strong> &#8594; <strong>Cube</strong> &#8594; rename the new GameObject "Floor"</div> <br />
 		<div class="sbo"><strong>5:</strong> drag and drop “Floor” in the Hierarchy onto “Environment”</div><br />
 		<div class="sbo"><strong>6:</strong> left click on “Floor” in the Hierarchy  &#8594; open the GameObject Inspector &#8594; set <strong>Transform Scale </strong> to X=10, Y=0.1, Z=10 </div> </br>
-		The scene window should show us a white floor now. The two walls will get created in the same way.<br/>
-		<div class="sbo"><strong>7:</strong> creat two 3D Objects <strong>Cube</strong>  &#8594; rename them to "Wall1" and "Wall2" &#8594; make them a child of "Environment"</div> <br/>
+		The scene window should show us a white floor now. The two walls will be created in the same way.<br/>
+		<div class="sbo"><strong>7:</strong> create two 3D Objects <strong>Cube</strong>  &#8594; rename them to "Wall1" and "Wall2" &#8594; make them a child of "Environment"</div> <br/>
 		<div class="sbo"><strong>8:</strong> open “Wall1” in the Inspector &#8594; set <strong>Transform Scale</strong> to X=10, Y=4, Z=0.1 &#8594; set the <strong>Transform Position</strong> to X=0, Y=2, Z=5<br/>
 		open “Wall2” in the Inspector &#8594; set <strong>Transform Scale</strong> to X=0.1, Y=4, Z=10 &#8594; set the <strong>Transform Position</strong> to X=-5, Y=2, Z=0</div> <br/>
 		We should paint the floor and the walls to make the room look more realistic. Therefore we can create some materials and add them as a component to our GameObjects.<br/>  

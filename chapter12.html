@@ -26,15 +26,7 @@
   $('#stuck_container').tmStickUp({});
 });
 </script>
-<!--[if lt IE 9]>
- <div style=' clear: both; text-align:center; position: relative;'>
-   <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-     <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
-   </a>
-</div>
-<script src="js/html5shiv.js"></script>
-<link rel="stylesheet" media="screen" href="css/ie.css">
-<![endif]-->
+
 </head>
 <body id="top">
 <!--==============================
@@ -58,8 +50,8 @@
               <ul class="sf-menu">
                <li class="current"><a href="index.html">Tutorial</a></li>
                <li><a href="downloads.html">Downloads</a></li>
-                <li><a href="helpfullinks.html">Helpful Links</a></li>
-			   <li><a href="about.html">About</a></li>
+               <li><a href="helpfullinks.html">Helpful Links</a></li>
+               <li><a href="about.html">About</a></li>
              </ul>
             </nav>
             <div class="clear"></div>
@@ -82,8 +74,8 @@
 	<div class="grid_12">
 	<h5>12.1: Implementing the Oculus Rift</h5>
 	
-	It's time to experience our project in Virtual Reality. For this tutorial we use the Oculus Rift CV1. Setup the Oculus Rift now. An installation guide can be found here. The Oculus software can be downloaded here. Follow the given instructions and start the Oculus Software. Unity will support VR for the Oculus only while the Oculus software is running.
-	We now can enable the VR mode, that is implemented in Unity. The VR mode allows us to spectate our project through the Oculus Rift. <br/>
+	It is time to experience our project in Virtual Reality now! For this tutorial we use the Oculus Rift CV1. Setup the Oculus Rift now. An installation guide can be found here. The Oculus software can be downloaded here. Follow the given instructions and start the Oculus Software. Unity will support VR for the Oculus only while the Oculus software is running.
+	We can now enable the VR mode that is implemented in Unity. The VR mode allows us to spectate our project through the Oculus Rift. <br/>
 	<div class="sbo"><strong>1:</strong> open the Oculus Software - click the settings icon in the right top - click settings - click General - enable Unknown Sources </div><br/>
 	<div class="sbo"><strong>2:</strong>  go into unity - click on <strong>Edit</strong> - <strong>Project Settings</strong> - <strong>Player</strong> - go to XR settings in the Inspector - choose Virtual Reality Support - hit <strong>play</strong> </div><br/>
 	
@@ -91,7 +83,7 @@
 	While we are using the Oculus Rift, our mouse interaction is disabled. The technically most progressive approach to replace the mouse interaction is to implement the Oculus Touch controller. The implementation of functional usable Oculus Touch controllers requires quite some work and would be beyond the scope of this tutorial if it’s done completely on our own. Fortunately, there are some free toolkits, that can simplify the task. We will download two free toolkits from the Asset Store and implement a visualization of hands and controllers in our project.<br/> 
 	<div class="sbo"><strong>1:</strong> open the tap Asset Store &#8594; search for “VRTK” &#8594; click on VRTK - Virtual Reality Toolkit [VR Toolkit] &#8594; click on <strong>Download</strong> &#8594;  <strong>Import</strong> &#8594; click <strong>Import</strong> within the popup </div><br/>
 	<div class="sbo"><strong>2:</strong> search for “Oculus Integration” &#8594; click on “Oculus Integration” &#8594; download it &#8594; import it (! this can take up to 15 min) </div><br/>
-	Next, we set up an Oculus VR CameraRig and  an Oculus VR Avatar to implement an representation for our hands and the Oculus Touch controllers. We will use some VRTK scripts to simplify this job. More Informations about the VRTK toolkit can be found here.<br/>
+	Next, we set up an Oculus VR CameraRig and  an Oculus VR Avatar to implement a representation for our hands and the Oculus Touch controllers. We will use some VRTK scripts to simplify this job. More Information about the VRTK toolkit can be found here.<br/>
 	<div class="sbo"><strong>3:</strong> create a new Empty GameObject &#8594; rename it “VR Manager” &#8594; create an Empty GameObject as a child of “VR Manager” &#8594; rename it “VRTK Setup” </div><br/>
 	<div class="sbo"><strong>4:</strong> open “VR Manager” in the Inspector &#8594; click <strong>Add Component</strong> &#8594; search for “VRTK_SDK Manager” &#8594; add it as a component </div><br/>
 	<div class="sbo"><strong>5:</strong> open “VRTK Setup” in the Inspector &#8594; click <strong>Add Component</strong> &#8594; search for “VRTK_SDK Setup” &#8594; add it as a component </div><br/>
@@ -115,7 +107,7 @@
 	The last thing we need to implement for the touch controllers is an option to interact with the data points. Therefore we need to add another two components to the “Right Controller”, change the "Interaction_DataPoint.cs" and "PlotData.cs" script.<br/>
 	<div class="sbo"><strong>19:</strong> open “Right Controller” in the Inspector &#8594; add the component “VRTK_Interact Use” &#8594; change Use Button to “Button One Press” &#8594; go to the “VRTK_Pointer” component &#8594; enable “Interact With Objects” &#8594; add the VRTK_InteractTouch component</div><br/>
 
-	<div class="sbo"><strong>20:</strong> open the “Interaction_DataPoint.cs” script &#8594; delete its content &#8594; copy past the new script &#8594; safe </div><br/>
+	<div class="sbo"><strong>20:</strong> open the “Interaction_DataPoint.cs” script &#8594; delete its content &#8594; copy past the new script &#8594; save </div><br/>
 			<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;max-width:800px ;max-height:500px;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008000; font-weight: bold">using</span> <span style="color: #0000FF; font-weight: bold">System.Collections</span>;
 		<span style="color: #008000; font-weight: bold">using</span> <span style="color: #0000FF; font-weight: bold">System.Collections.Generic</span>;
 		<span style="color: #008000; font-weight: bold">using</span> <span style="color: #0000FF; font-weight: bold">UnityEngine</span>;

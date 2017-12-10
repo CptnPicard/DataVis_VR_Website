@@ -26,15 +26,7 @@
   $('#stuck_container').tmStickUp({});
 });
 </script>
-<!--[if lt IE 9]>
- <div style=' clear: both; text-align:center; position: relative;'>
-   <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-     <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
-   </a>
-</div>
-<script src="js/html5shiv.js"></script>
-<link rel="stylesheet" media="screen" href="css/ie.css">
-<![endif]-->
+
 </head>
 <body id="top">
 <!--==============================
@@ -58,8 +50,8 @@
               <ul class="sf-menu">
                <li class="current"><a href="index.html">Tutorial</a></li>
                <li><a href="downloads.html">Downloads</a></li>
-                <li><a href="helpfullinks.html">Helpful Links</a></li>
-			   <li><a href="about.html">About</a></li>
+               <li><a href="helpfullinks.html">Helpful Links</a></li>
+               <li><a href="about.html">About</a></li>
              </ul>
             </nav>
             <div class="clear"></div>
@@ -81,16 +73,16 @@
 	</div>
 	<div class="grid_12">
 	<h5>11.1: Data Menu</h5>
-		We are now going to implement another screen. This screen should contain some dropdown menus and a button, which allows the user to select, which value of our dataset got plotted to an axis.<br/>
+		We are now going to implement another screen. This screen should contain some dropdown menus and a button which allows the user to select which value of our dataset gets plotted to an axis.<br/>
 
-		<div class="sbo"><strong>1:</strong> create a new cube GameObject &#8594; name it “Data Menu” &#8594; change its Transform unit it looks like a screen &#8594; place it next to the coordinate system &#8594; assign the "screen_material" to it </div><br/>
+		<div class="sbo"><strong>1:</strong> create a new cube GameObject &#8594; name it “Data Menu” &#8594; change its Transform until it looks like a screen &#8594; place it next to the coordinate system &#8594; assign the "screen_material" to it </div><br/>
 		<div class="sbo"><strong>2:</strong> right click on “Data Menu” &#8594; click <strong>UI</strong> &#8594; <strong>Canvas</strong> &#8594; right click the new canvas &#8594; <strong>UI</strong> &#8594; <strong>Dropdown</strong> &#8594; create two more dropdowns and a button on the same way</div><br/>
 		<div class="sbo"><strong>3:</strong> open the new canvas in the Inspector &#8594; change its Render Mode to "World Space" &#8594; change its position to X=0, Y=0, Z=-1 &#8594; change its Scale to X=0.01, Y=0.01, Z=1 &#8594; change the Render Mode to “World Space”</div><br/>
-		<div class="sbo"><strong>4:</strong> change the scale of the three dropdowns and the button to X=0.5, Y=0.5, Z=1 &#8594; change there Y position to four different values &#8594; all items should appear under each other </div><br/>
+		<div class="sbo"><strong>4:</strong> change the scale of the dropdowns and the button to X=0.5, Y=0.5, Z=1 &#8594; change there Y position to four different values &#8594; all items should appear under each other </div><br/>
 		<div class="sbo"><strong>5:</strong> open the “Text” child GameObject of “Button” &#8594; change the text within the Text(Script) component to “New Plot!”  </div><br/>
-		<div class="sbo"><strong>6:</strong> create a new script &#8594; name it “Interaction_DataMenu” &#8594; attached it as a component to the “Data Manager” GameObject</div><br/>
+		<div class="sbo"><strong>6:</strong> create a new script &#8594; name it “Interaction_DataMenu” &#8594; attach it as a component to the “Data Manager” GameObject</div><br/>
 
-		Now we need to write the script, that handles our input. The script "Interaction_DataMenu.cs" will fill all three dropboxes with the <code>dataSetLabels</code> list. Whenever a new item is selected, the dropbox should call the <code>Dropbox_IndexChange</code> function, that change the axis parameter within the Plot Data (Script) component from the GameObject “Data Manager”.
+		Now we need to write the script that handles our input. The script "Interaction_DataMenu.cs" will fill all three dropboxes with the <code>dataSetLabels</code> list. Whenever a new item is selected, the dropbox should call the <code>Dropbox_IndexChange</code> function that changes the axis parameter within the Plot Data (Script) component from the GameObject “Data Manager”.
 		Before we can test the function, we need to set the references for our "Interaction_DataMenu.cs" script and tell each interactable item (dropdowns and button), which function it should call.<br/>
 		
 					<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;max-width:800px ;max-height:500px;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008000; font-weight: bold">using</span> <span style="color: #0000FF; font-weight: bold">System.Collections</span>;
@@ -119,8 +111,8 @@
 				}
 
 
-				<span style="color: #408080; font-style: italic">//when a new item is choosen in a dropbox, the Dropbox_IndexChange function is called</span>
-				<span style="color: #408080; font-style: italic">//the index reffers the index of the choosen option</span>
+				<span style="color: #408080; font-style: italic">//when a new item is chosen in a dropbox, the Dropbox_IndexChange function is called</span>
+				<span style="color: #408080; font-style: italic">//the index refers the index of the chosen option</span>
 				<span style="color: #008000; font-weight: bold">public</span> <span style="color: #008000; font-weight: bold">void</span> <span style="color: #0000FF">xDropdown_IndexChange</span>(<span style="color: #B00040">int</span> index)
 				{
 					gameObject.GetComponent&lt;PlotData&gt;().xAxis = dataset.dataSetLabels[index]; 
@@ -136,7 +128,7 @@
 					gameObject.GetComponent&lt;PlotData&gt;().zAxis = dataset.dataSetLabels[index]; 
 				}
 
-				<span style="color: #408080; font-style: italic">//the ButtenPress function is called, when the button is pressed</span>
+				<span style="color: #408080; font-style: italic">//the ButtonPress function is called when the button is pressed</span>
 				  <span style="color: #008000; font-weight: bold">public</span> <span style="color: #008000; font-weight: bold">void</span> <span style="color: #0000FF">ButtonPress</span>()
 				  {
 					  gameObject.GetComponent&lt;PlotData&gt;().newplot = <span style="color: #008000; font-weight: bold">true</span>;
@@ -149,9 +141,9 @@
 		
 		<div class="sbo"><strong>7:</strong> open “Data Manager” in the Inspector &#8594; drag and drop “Data Manager” form the Hierarchy onto Dataset within the Interaction_Data Menu (Script) component</div><br/>
 		<div class="sbo"><strong>8:</strong> drag and drop one each “Dropdown” from the Hierarchy into X Dropdown, Y Dropdown and Z Dropdown within the Interaction_Data Menu (Script) component</div><br/>
-		<div class="sbo"><strong>9:</strong> open the first “Dropdown” in the Inspector &#8594; got to On Value Changed(Int32) within the Dropdown(Script) component &#8594; press <strong>+</strong> &#8594; press <strong>None(Object)</strong> &#8594; select the “Data Manager” GameObject in the list &#8594; click <strong>No Function</strong> &#8594; choose “Interaction_DataMenu” &#8594; choose the Dynamic int “xDropdown_IndexChange” &#8594; repeat this for the other two dropdowns and select the Dynamic int “yDropdown_IndexChange”,  “xDropdown_IndexChange” for them</div><br/>
+		<div class="sbo"><strong>9:</strong> open the first “Dropdown” in the Inspector &#8594; go to On Value Changed(Int32) within the Dropdown(Script) component &#8594; press <strong>+</strong> &#8594; press <strong>None(Object)</strong> &#8594; select the “Data Manager” GameObject in the list &#8594; click <strong>No Function</strong> &#8594; choose “Interaction_DataMenu” &#8594; choose the Dynamic ints “xDropdown_IndexChange” &#8594; repeat this for the other two dropdowns and select the Dynamic int “yDropdown_IndexChange”,  “xDropdown_IndexChange” for them</div><br/>
 
-		We should test the menu now. Before that, we have to adjust the “Main Camera” again. .<br/>
+		We should test the menu now. Before that, we have to adjust the “Main Camera” again.<br/>
 
 		<div class="sbo"><strong>10:</strong> change the Transform of the “Main Camera” until you can see both screens in the Game view</div><br/>
 		<div class="sbo"><strong>11:</strong> hit play &#8594; test the dropdown and button functionality</div><br/>
