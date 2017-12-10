@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Chapter 4</title>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no">
+<link rel="icon" href="images/favicon.ico">
+<link rel="shortcut icon" href="images/favicon.ico">
+<link rel="stylesheet" href="css/stuck.css">
+<link rel="stylesheet" href="css/form.css">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/jquery.js"></script>
+<script src="js/jquery-migrate-1.1.1.js"></script>
+<script src="js/script.js"></script>
+<script src="js/superfish.js"></script>
+<script src="js/jquery.equalheights.js"></script>
+<script src="js/jquery.mobilemenu.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<script src="js/tmStickUp.js"></script>
+<script src="js/modal.js"></script>
+<script src="js/TMForm.js"></script>
+<script src="js/jquery.ui.totop.js"></script>
+<script>
+ $(document).ready(function(){
+  $().UItoTop({ easingType: 'easeOutQuart' });
+  $('#stuck_container').tmStickUp({});
+});
+</script>
+<!--[if lt IE 9]>
+ <div style=' clear: both; text-align:center; position: relative;'>
+   <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+     <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
+   </a>
+</div>
+<script src="js/html5shiv.js"></script>
+<link rel="stylesheet" media="screen" href="css/ie.css">
+<![endif]-->
+</head>
+<body id="top">
+<!--==============================
+              header
+=================================-->
+<header>
+<!--==============================
+            Stuck menu
+=================================-->
+  <section id="stuck_container">
+    <div class="container">
+      <div class="row">
+        <div class="grid_12">
+        <h1>
+          <a href="index.html">
+            <img src="images/logo.png" alt="Logo alt">
+          </a>
+        </h1>
+          <div class="navigation ">
+            <nav>
+              <ul class="sf-menu">
+               <li class="current"><a href="index.html">Tutorial</a></li>
+               <li><a href="downloads.html">Downloads</a></li>
+               <li><a href="helpfullinks.html">Helpful Links</a></li>
+			   <li><a href="about.html">About</a></li>
+             </ul>
+            </nav>
+            <div class="clear"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</header>
+<!--=====================
+          Content
+======================-->
+<section class="content"><div class="ic"></div>
+  <div class="container">
+    <div class="row">
+      <div class="grid_12">
+        <h3 class="ta__center">Chapter 4: Start with Unity</h3>
+      </div>
+	</div>
+	<div class="grid_12">
+	<p>
+	   <h4>4.1 What is Unity</h4>
+	   Unity is a runtime development environment for game design that is developed by the company <italic>Unity Technologies</italic>. The development environment allows an interactive design of 3D applications. A 3D scene can be created with so called GameObject, which are organized in a <a class="td_underline" href="https://en.wikipedia.org/wiki/Scene_graph">scene graph</a>. GameObjects like primitive bodies (sphere, cube, ...), light sources, cameras, etc. can be added to a scene within the editor. Components like scripts, materials or physical attributes can get attached to GameObjects. The simulated behavior of the GameObject can be observed through a game view. Finished projects can be exported as executable applications.  
+	</p>
+	<p>
+	   <h4>4.2 Download and Installation </h4>
+	   The newest version of Unity can be downloaded <a class="td_underline" href="https://store.unity.com/de/download?ref=personal">here</a>. This tutorial is using the Unity version <italic>2017.2</italic>. Follow the installation instructions given by the install application. Unity is free for non-commercial use but you have to create an Unity-Account at the end of the installation. Once the installation is done and you have created your account, you can start to set up a new Project in Unity.
+	</p>
+	
+	<div class="row">
+	   <img src="images/chapter4/tut1.jpg" alt="" class="img_inner fleft">
+	   <h4>4.3 Create a new Project </h4>
+	    To create a new project, follow these steps:<br/>
+
+		
+		<div class="sbo">
+		&#8594; Click <strong>New</strong> in the upper right<br/>
+		&#8594; Select <strong>3D</strong>, since we want to create a three dimensional project<br/>
+		&#8594; Enter a <strong>project name</strong>, for example “Data_Visualization”<br/>
+		&#8594; Select a <strong>location</strong>, where you want to store your project<br/>
+		&#8594; Press <strong>Create project</strong> to create your new project</div><br/>
+
+	</div>
+
+	
+	<p>
+	<img src="images/chapter4/tut4.jpg" alt="" class="img_inner fleft">
+	<h4>4.4 The development environment <italic>Unity Editor</italic></h4>
+	Once the new project is created, the <italic>Unity Editor</italic> will open. The <italic>Unity Editor</italic> provides several windows, menus and blanks. Before we start, we should have a look on the most important features. <br />
+	The window in the center is showing us the <strong>Asset Store</strong>. The Asset Store offers toolkits, plugins, predesigned objects and other content. Everything can be bought, downloaded and imported through the editor. 
+	Beside the Asset Store, there are two other taps for the centered window. Selecting the <strong>Game</strong> tab will open the game window, which shows an ingame view.
+	The third tab <strong>Scene</strong> will open an overview over the game scene. Unity will add a Main Camera and a Directional Light to any new scene by default. You should see them in the scene window. 
+	On the left, next to the centered window, you can see the <strong>Hierarchy</strong>. The Hierarchy contains all <strong>GameObjects</strong> of a scene and is used to organize all GameObjects.
+	To get more informations about a specific GameObject you can click on an object in the Hierarchy (for example the “Main Camera”) go to the most right window and open the tab <strong>Inspector</strong>. The Inspector contains all informations about the selected GameObject.
+	The bottom window is the <strong>project explorer</strong>. The new project contains only an empty Assets folder. This folder will store scenes, scripts and other components of the project later. 
+
+	
+	</p>
+	   
+	</div>
+</section>
+
+</body>
+</html>

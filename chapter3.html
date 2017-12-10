@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Chapter 3</title>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no">
+<link rel="icon" href="images/favicon.ico">
+<link rel="shortcut icon" href="images/favicon.ico">
+<link rel="stylesheet" href="css/stuck.css">
+<link rel="stylesheet" href="css/form.css">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/jquery.js"></script>
+<script src="js/jquery-migrate-1.1.1.js"></script>
+<script src="js/script.js"></script>
+<script src="js/superfish.js"></script>
+<script src="js/jquery.equalheights.js"></script>
+<script src="js/jquery.mobilemenu.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<script src="js/tmStickUp.js"></script>
+<script src="js/modal.js"></script>
+<script src="js/TMForm.js"></script>
+<script src="js/jquery.ui.totop.js"></script>
+<script>
+ $(document).ready(function(){
+  $().UItoTop({ easingType: 'easeOutQuart' });
+  $('#stuck_container').tmStickUp({});
+});
+</script>
+<!--[if lt IE 9]>
+ <div style=' clear: both; text-align:center; position: relative;'>
+   <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+     <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
+   </a>
+</div>
+<script src="js/html5shiv.js"></script>
+<link rel="stylesheet" media="screen" href="css/ie.css">
+<![endif]-->
+</head>
+<body id="top">
+<!--==============================
+              header
+=================================-->
+<header>
+<!--==============================
+            Stuck menu
+=================================-->
+  <section id="stuck_container">
+    <div class="container">
+      <div class="row">
+        <div class="grid_12">
+        <h1>
+          <a href="index.html">
+            <img src="images/logo.png" alt="Logo alt">
+          </a>
+        </h1>
+          <div class="navigation ">
+            <nav>
+              <ul class="sf-menu">
+               <li class="current"><a href="index.html">Tutorial</a></li>
+               <li><a href="downloads.html">Downloads</a></li>
+                <li><a href="helpfullinks.html">Helpful Links</a></li>
+			   <li><a href="about.html">About</a></li>
+             </ul>
+            </nav>
+            <div class="clear"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</header>
+<!--=====================
+          Content
+======================-->
+<section class="content"><div class="ic"></div>
+  <div class="container">
+    <div class="row">
+      <div class="grid_12">
+        <h3 class="ta__center">Chapter 3: The Oculus Rift</h3>
+      </div>
+	</div>
+	<div class="grid_12">
+		<div class="row">
+	   <div class="block">
+			<img src="images/gf1.jpg" alt="" class="img_inner fleft">
+			<p>
+			<h4>3.1 The Oculus Rift Hardware</h4>
+			The Oculus Rift is a head-mounted VR device which was released in its first version in 2013 by the company Oculus VR. The following section gives a short introduction into the technical characteristics and the spectrum of applications of the newest version “Oculus Rift Consumer Version 1“(2016). <br />
+			</p>
+		<h5>The headset</h5>
+		The core elements of the Oculus Rift are two screens with a solution of 1080×1200 pixel each, fitted into a headset. To enable the human eye to focus on the closely located screens, two pairs of lenses are arranged in front of the screens. Each screen is presenting an image of a scene from a slightly different angle. The presentation of two 2D images from different angles allows our brain to experience it as one 3D image.
+		The image can be presented with respect to the position and motion of the headset, creating the impression that the user can look around naturally in a virtual environment. Position and motion tracking are done by a position tracker (see next section) and an “adjected reality tracker”. The “adjected reality tracker” is a combination of a gyrometer, a magnetometer and an accelerometer. All three detectors are working in three dimensions and are supposed to track even very tiny movements of the head. <br />
+		</div>
+		</div>
+		
+		<div class="row">
+		<div class="block">
+		<img src="images/gf2.jpg" alt="" class="img_inner fleft">
+		<h5>The positional tracker</h5>
+		The position tracker is meant to track the position of the head in 3D space. This is done by Oculus’ so called “constellation tracking system” - an infrared camera that is installed to oversee the location is taking pictures of a series of infrared LEDs on the user’s headset. To provide a 360-degree tracking the headset features several LEDs in the front and back. The final position of the user’s head in real space is then processed from the infrared images by Oculus’ software.<br />
+		</div>
+		</div>
+		
+		<div class= "row">
+		<div class="block">
+		<img src="images/gf3.jpg" alt="" class="img_inner fleft">
+		<h5>Oculus Touch</h5>
+		To enable the user to interact with the virtual reality Oculus VR released a controller called “Oculus Touch” in 2016. The controller setup consists of two mirrored handheld devices - one for each hand - and another position tracker similar to the position tracker for the headset. To track the position and orientation of the controllers the “constellation tracker system” is applied again, tracking different infrared LEDs around the controller. Several buttons and touch sensors enable the user to give commands for an interaction in an almost natural way.
+		</div>
+		</div>
+	</div>
+</section>
+
+</body>
+</html>

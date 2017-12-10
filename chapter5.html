@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Chapter 5</title>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no">
+<link rel="icon" href="images/favicon.ico">
+<link rel="shortcut icon" href="images/favicon.ico">
+<link rel="stylesheet" href="css/stuck.css">
+<link rel="stylesheet" href="css/form.css">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/jquery.js"></script>
+<script src="js/jquery-migrate-1.1.1.js"></script>
+<script src="js/script.js"></script>
+<script src="js/superfish.js"></script>
+<script src="js/jquery.equalheights.js"></script>
+<script src="js/jquery.mobilemenu.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<script src="js/tmStickUp.js"></script>
+<script src="js/modal.js"></script>
+<script src="js/TMForm.js"></script>
+<script src="js/jquery.ui.totop.js"></script>
+<script>
+ $(document).ready(function(){
+  $().UItoTop({ easingType: 'easeOutQuart' });
+  $('#stuck_container').tmStickUp({});
+});
+</script>
+<!--[if lt IE 9]>
+ <div style=' clear: both; text-align:center; position: relative;'>
+   <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+     <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
+   </a>
+</div>
+<script src="js/html5shiv.js"></script>
+<link rel="stylesheet" media="screen" href="css/ie.css">
+<![endif]-->
+</head>
+<body id="top">
+<!--==============================
+              header
+=================================-->
+<header>
+<!--==============================
+            Stuck menu
+=================================-->
+  <section id="stuck_container">
+    <div class="container">
+      <div class="row">
+        <div class="grid_12">
+        <h1>
+          <a href="index.html">
+            <img src="images/logo.png" alt="Logo alt">
+          </a>
+        </h1>
+          <div class="navigation ">
+            <nav>
+              <ul class="sf-menu">
+               <li class="current"><a href="index.html">Tutorial</a></li>
+               <li><a href="downloads.html">Downloads</a></li>
+               <li><a href="helpfullinks.html">Helpful Links</a></li>
+			   <li><a href="about.html">About</a></li>
+             </ul>
+            </nav>
+            <div class="clear"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</header>
+<!--=====================
+          Content
+======================-->
+<section class="content"><div class="ic"></div>
+  <div class="container">
+    <div class="row">
+      <div class="grid_12">
+        <h3 class="ta__center">Chapter 5: A Simple Room</h3>
+      </div>
+	</div>
+
+	
+	 <div class="grid_12">
+
+		<h5>5.1 Create an Environment</h5>
+		As a first step, we want to set up a room, in which we can present our data later. We will keep it simple and create a room out of two walls and a floor.
+		To begin, we will save our scene in the "Assets" folder and create a new GameObject. <br/>
+		<div class="sbo"><strong>1:</strong> click <strong>File</strong> &#8594; <strong>Save Scene</strong> &#8594; creat a new folder "Scenes" &#8594; save the scene as “scene1” in the new folder</div> </li><br />
+		<div class="sbo"><strong>2:</strong> right click on Hierarchy window &#8594; click <strong>Create Empty</strong> &#8594; right click on "GameObject" &#8594; <strong>Rename</strong> &#8594; name it "Environment"</div>  <br/>
+		“Environment” is a so called Empty GameObject. You can't see it in the scene or game window. We just use it to organize our project. GameObjects can become a child of other GameObjects by attaching them in the Hierarchy. The child of a GameObject will get a local position and a local scale relative to its parent. We want to attach some children to the “Environment” object soon. We should reset the position and scale attribute of the parent to ensure, that the children are not getting deformed by these attributes. Attributes of GameObjects can be changed in the Inspector. <br/>
+		<div class="sbo"><strong>3:</strong> click on “Environment” in the Hierarchy &#8594; open the Inspector &#8594; click the gear icon under Transform &#8594; <strong>Reset</strong></div> <br/>
+		Our room should get a floor. To structure our project, we want “Floor” to be a child of “Environment” <br/>
+		<div class="sbo"><strong>4:</strong> right click on Hierarchy window &#8594; <strong>3D Object</strong> &#8594; <strong>Cube</strong> &#8594; rename the new GameObject "Floor"</div> <br />
+		<div class="sbo"><strong>5:</strong> drag and drop “Floor” in the Hierarchy onto “Environment”</div><br />
+		<div class="sbo"><strong>6:</strong> left click on “Floor” in the Hierarchy  &#8594; open the GameObject Inspector &#8594; set <strong>Transform Scale </strong> to X=10, Y=0.1, Z=10 </div> </br>
+		The scene window should show us a white floor now. The two walls will get created in the same way.<br/>
+		<div class="sbo"><strong>7:</strong> creat two 3D Objects <strong>Cube</strong>  &#8594; rename them to "Wall1" and "Wall2" &#8594; make them a child of "Environment"</div> <br/>
+		<div class="sbo"><strong>8:</strong> open “Wall1” in the Inspector &#8594; set <strong>Transform Scale</strong> to X=10, Y=4, Z=0.1 &#8594; set the <strong>Transform Position</strong> to X=0, Y=2, Z=5<br/>
+		open “Wall2” in the Inspector &#8594; set <strong>Transform Scale</strong> to X=0.1, Y=4, Z=10 &#8594; set the <strong>Transform Position</strong> to X=-5, Y=2, Z=0</div> <br/>
+		We should paint the floor and the walls to make the room look more realistic. Therefore we can create some materials and add them as a component to our GameObjects.   
+		<div class="sbo"><strong>9:</strong> open the Assets folder in the Project explorer &#8594; right click in the Assets window &#8594; <strong>Create</strong> &#8594; <strong>Folder</strong> &#8594; name it “Materials”</div>
+		<div class="sbo"><strong>10:</strong> go into the Materials folder &#8594; right click &#8594; <strong>Create</strong> &#8594; <strong>Material</strong> &#8594; name it “floor_material”</div>
+		<div class="sbo"><strong>11:</strong> open “floor_material” in the Inspector &#8594; click on the <strong>Main Maps Albedo</strong> color icon &#8594; choose a color &#8594; drag and drop “floor_material” from the project explorer onto the floor in the scene window</div>
+		<div class="sbo"><strong>12:</strong> create a new material &#8594; name it “wall_material” &#8594; change its color &#8594; drag and drop it onto the walls</div>
+		<iframe width="560" height="315" class="video" src="https://www.youtube.com/embed/0usIoG02Knw" frameborder="100" allowfullscreen></iframe>
+
+	 </div>	
+	</div>
+
+</section>
+
+</body>
+</html>

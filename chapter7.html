@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Chapter 7</title>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no">
+<link rel="icon" href="images/favicon.ico">
+<link rel="shortcut icon" href="images/favicon.ico">
+<link rel="stylesheet" href="css/stuck.css">
+<link rel="stylesheet" href="css/form.css">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/jquery.js"></script>
+<script src="js/jquery-migrate-1.1.1.js"></script>
+<script src="js/script.js"></script>
+<script src="js/superfish.js"></script>
+<script src="js/jquery.equalheights.js"></script>
+<script src="js/jquery.mobilemenu.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<script src="js/tmStickUp.js"></script>
+<script src="js/modal.js"></script>
+<script src="js/TMForm.js"></script>
+<script src="js/jquery.ui.totop.js"></script>
+<script>
+ $(document).ready(function(){
+  $().UItoTop({ easingType: 'easeOutQuart' });
+  $('#stuck_container').tmStickUp({});
+});
+</script>
+<!--[if lt IE 9]>
+ <div style=' clear: both; text-align:center; position: relative;'>
+   <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+     <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
+   </a>
+</div>
+<script src="js/html5shiv.js"></script>
+<link rel="stylesheet" media="screen" href="css/ie.css">
+<![endif]-->
+</head>
+<body id="top">
+<!--==============================
+              header
+=================================-->
+<header>
+<!--==============================
+            Stuck menu
+=================================-->
+  <section id="stuck_container">
+    <div class="container">
+      <div class="row">
+        <div class="grid_12">
+        <h1>
+          <a href="index.html">
+            <img src="images/logo.png" alt="Logo alt">
+          </a>
+        </h1>
+          <div class="navigation ">
+            <nav>
+              <ul class="sf-menu">
+               <li class="current"><a href="index.html">Tutorial</a></li>
+               <li><a href="downloads.html">Downloads</a></li>
+               <li><a href="helpfullinks.html">Helpful Links</a></li>
+			   <li><a href="about.html">About</a></li>
+             </ul>
+            </nav>
+            <div class="clear"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</header>
+<!--=====================
+          Content
+======================-->
+<section class="content"><div class="ic"></div>
+  <div class="container">
+    <div class="row">
+      <div class="grid_12">
+        <h3 class="ta__center">7. Loading a CSV File</h3>
+      </div>
+	</div>
+	<div class="grid_12">
+	<h5>7.1 Loading a CSV File</h5>
+	In the following section, we will implement a C# script, that allows us to load a CSV file into our Unity project. First we will create a new empty GameObject to hold our script as a component, than we will create a new script, attach it to the GameObject and add it with functionality. <br/>
+	<div class="sbo"><strong>1:</strong> create a new empty GameObject &#8594; rename it “Data Manager” </div> <br />
+	<div class="sbo"><strong>2:</strong> create a new folder within the Assets folder &#8594; name it “Scripts”  </div> <br />
+	<div class="sbo"><strong>3:</strong> go into the “Scripts” folder &#8594; right click &#8594; <strong>Create</strong> &#8594; <strong>C# Script</strong> &#8594; name it "DataSet"</div> <br />
+	<div class="sbo"><strong>4:</strong> drag and drop the new script onto the “Data Manager” GameObject  </div> <br />
+	Now we write the acutal script, that loads a CSV file at a given directory. First, we define a new Class <code>Datapoint</code>. DataPoints can store a list of values and a list of labels, that defines, what the values stands for.
+	The function <code>ReadDataset</code> will open the file and read it line by line. The first line is saved into the public variable <code>dataSetLabels</code>. It should identify what the values in each row stands for. For each other line an instance of the class <code>Datapoint</code> is created and added to the public list <code>listDataPoints</code>. 
+	</div>
+	
+	<div class="grid_12">
+			<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;max-width:800px ;max-height:500px;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008000; font-weight: bold">using</span> <span style="color: #0000FF; font-weight: bold">System.Collections</span>;
+		<span style="color: #008000; font-weight: bold">using</span> <span style="color: #0000FF; font-weight: bold">System.Collections.Generic</span>;
+		<span style="color: #008000; font-weight: bold">using</span> <span style="color: #0000FF; font-weight: bold">UnityEngine</span>;
+		<span style="color: #008000; font-weight: bold">using</span> <span style="color: #0000FF; font-weight: bold">System.IO</span>;
+
+		<span style="color: #008000; font-weight: bold">public</span> <span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">DataSet</span> : MonoBehaviour {
+
+			<span style="color: #008000; font-weight: bold">public</span> <span style="color: #B00040">string</span> csvFilePath;
+			<span style="color: #008000; font-weight: bold">public</span> List&lt;<span style="color: #B00040">string</span>&gt; dataSetLabels = <span style="color: #008000; font-weight: bold">new</span> List&lt;<span style="color: #B00040">string</span>&gt;();
+			<span style="color: #008000; font-weight: bold">public</span> List&lt;DataPoint&gt; listDataPoints = <span style="color: #008000; font-weight: bold">new</span> List&lt;DataPoint&gt;(); 
+
+			<span style="color: #408080; font-style: italic">// Use this for initialization</span>
+			<span style="color: #008000; font-weight: bold">void</span> <span style="color: #0000FF">Awake</span> () {
+				ReadDataset();
+			}
+
+			<span style="color: #408080; font-style: italic">//Function ReadDataset :</span>
+			<span style="color: #408080; font-style: italic">//read the csv-file at the csvFilePath directory</span>
+			<span style="color: #408080; font-style: italic">//the first line will get saved in the list dataSetLabels</span>
+			<span style="color: #408080; font-style: italic">//each other line creats a DataPoint instance and add it to listDataPoints</span>
+			<span style="color: #008000; font-weight: bold">void</span> <span style="color: #0000FF">ReadDataset</span>()
+			{
+				<span style="color: #B00040">bool</span> firstline = <span style="color: #008000; font-weight: bold">true</span>;
+				StreamReader sr = <span style="color: #008000; font-weight: bold">new</span> StreamReader(csvFilePath);
+				<span style="color: #008000; font-weight: bold">while</span> (!sr.EndOfStream)
+				{
+					<span style="color: #B00040">string</span>[] line = sr.ReadLine().Split(<span style="color: #BA2121">&#39;,&#39;</span>);
+
+					<span style="color: #008000; font-weight: bold">if</span> (firstline)
+					{
+						<span style="color: #008000; font-weight: bold">foreach</span> (<span style="color: #B00040">string</span> element <span style="color: #008000; font-weight: bold">in</span> line)
+						{
+							dataSetLabels.Add(element);
+						}
+						firstline = <span style="color: #008000; font-weight: bold">false</span>;
+					}
+					<span style="color: #008000; font-weight: bold">else</span>
+					{
+						List&lt;<span style="color: #B00040">string</span>&gt; values = <span style="color: #008000; font-weight: bold">new</span> List&lt;<span style="color: #B00040">string</span>&gt;();
+
+						<span style="color: #008000; font-weight: bold">foreach</span> (<span style="color: #B00040">string</span> element <span style="color: #008000; font-weight: bold">in</span> line)
+						{
+							values.Add(element);
+						}
+						<span style="color: #008000; font-weight: bold">if</span> (dataSetLabels.Count == values.Count)
+						{
+							DataPoint point = <span style="color: #008000; font-weight: bold">new</span> DataPoint(values, dataSetLabels);
+							listDataPoints.Add(point);
+						}
+					}
+
+				}
+			}
+
+		}
+
+		<span style="color: #408080; font-style: italic">// class DataPoint:</span>
+		<span style="color: #408080; font-style: italic">// each datapoint has two list to store several values and there labels</span>
+		<span style="color: #008000; font-weight: bold">public</span> <span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">DataPoint</span>{
+
+			<span style="color: #008000; font-weight: bold">public</span> List&lt;<span style="color: #B00040">string</span>&gt; valueList;
+			<span style="color: #008000; font-weight: bold">public</span> List&lt;<span style="color: #B00040">string</span>&gt; labelList;
+
+			<span style="color: #408080; font-style: italic">//DataPoint Constructor</span>
+			<span style="color: #008000; font-weight: bold">public</span> <span style="color: #0000FF">DataPoint</span>(List&lt;<span style="color: #B00040">string</span>&gt; values, List&lt;<span style="color: #B00040">string</span>&gt; labels)
+			{
+				valueList = values;
+				labelList = labels;
+			}
+
+			<span style="color: #408080; font-style: italic">//funtion GetValue:</span>
+			<span style="color: #408080; font-style: italic">//returns the assigned value for a given label </span>
+			<span style="color: #008000; font-weight: bold">public</span> <span style="color: #B00040">string</span> <span style="color: #0000FF">GetValue</span>(<span style="color: #B00040">string</span> label)
+			{
+				<span style="color: #008000; font-weight: bold">if</span> (labelList.Contains(label))
+				{
+					<span style="color: #B00040">int</span> index = labelList.FindIndex(a =&gt; a == label);
+					<span style="color: #008000; font-weight: bold">return</span> valueList[index];
+				}
+				<span style="color: #008000; font-weight: bold">else</span>
+				{
+					<span style="color: #008000; font-weight: bold">return</span> <span style="color: #BA2121">&quot;empty axis&quot;</span>;
+				}
+			}
+		}
+		</pre></div>
+	
+		Before we can test the new script, we need a dataset. Your can download an example here. We also have to declare the public string <code>csvFilePath</code>
+		<div class="sbo"><strong>5:</strong> open the GameObject "Data Manager" in the Inspector &#8594; go to Data Set (Script) &#8594; csvFilePath &#8594; write in the file path (for example: C:\user\Desktop\dataset.txt)</div></br>
+		Now we can test the script for errors by hitting the play button above the scene window. There is not too much to see but our dataset is now stored in the public list <code>listDataPoints</code> and we can access it from other scripts.</br>
+		<iframe width="560" height="315" class="video" src="https://www.youtube.com/embed/ZrzuOn4ubDQ" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+	</div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Chapter 10</title>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no">
+<link rel="icon" href="images/favicon.ico">
+<link rel="shortcut icon" href="images/favicon.ico">
+<link rel="stylesheet" href="css/stuck.css">
+<link rel="stylesheet" href="css/form.css">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/jquery.js"></script>
+<script src="js/jquery-migrate-1.1.1.js"></script>
+<script src="js/script.js"></script>
+<script src="js/superfish.js"></script>
+<script src="js/jquery.equalheights.js"></script>
+<script src="js/jquery.mobilemenu.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<script src="js/tmStickUp.js"></script>
+<script src="js/modal.js"></script>
+<script src="js/TMForm.js"></script>
+<script src="js/jquery.ui.totop.js"></script>
+<script>
+ $(document).ready(function(){
+  $().UItoTop({ easingType: 'easeOutQuart' });
+  $('#stuck_container').tmStickUp({});
+});
+</script>
+<!--[if lt IE 9]>
+ <div style=' clear: both; text-align:center; position: relative;'>
+   <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+     <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
+   </a>
+</div>
+<script src="js/html5shiv.js"></script>
+<link rel="stylesheet" media="screen" href="css/ie.css">
+<![endif]-->
+</head>
+<body id="top">
+<!--==============================
+              header
+=================================-->
+<header>
+<!--==============================
+            Stuck menu
+=================================-->
+  <section id="stuck_container">
+    <div class="container">
+      <div class="row">
+        <div class="grid_12">
+        <h1>
+          <a href="index.html">
+            <img src="images/logo.png" alt="Logo alt">
+          </a>
+        </h1>
+          <div class="navigation ">
+            <nav>
+              <ul class="sf-menu">
+               <li class="current"><a href="index.html">Tutorial</a></li>
+               <li><a href="downloads.html">Downloads</a></li>
+               <li><a href="helpfullinks.html">Helpful Links</a></li>
+			   <li><a href="about.html">About</a></li>
+             </ul>
+            </nav>
+            <div class="clear"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</header>
+<!--=====================
+          Content
+======================-->
+<section class="content"><div class="ic"></div>
+  <div class="container">
+    <div class="row">
+      <div class="grid_12">
+        <h3 class="ta__center">10. Information Board</h3>
+      </div>
+	</div>
+	<div class="grid_12">
+	<h5>10.1 Information Board</h5>
+		In this section, we will implement an information board. The information board should show us all informations about a selected datapoint. First, we have to create a screen and an user interface (UI) GameObject. Unity provides several UI GameObjects like text windows, button, dropdown menus etc. Creating an UI element will also create two other GameObject - A Canvas, that contains the UI elements and an Event System that handles input based events.  
+		
+		<div class="sbo"><strong>1:</strong> create a new GameObject &#8594; rename it "Info Board" &#8594; resize it to a shape, that looks like a screen &#8594; place it next to the Coordinate System </div><br />
+		<div class="sbo"><strong>2:</strong> create a new Material &#8594; choose a dark color &#8594; add it to the "Info Board" GameObject</div><br />
+		<div class="sbo"><strong>3:</strong> right click into <strong>Hierarchy</strong> &#8594; click <strong>UI</strong> &#8594; click <strong>Text</strong> &#8594; drag and drop "Canvas" and "Eventsystem" onto “Info Board”</div><br />
+		<div class="sbo"><strong>4:</strong> open the Canva GameObject in the Inspector &#8594; go to <strong>Rect Transform</strong> &#8594; change the scale to X =0.01, Y= 0.01, Z=1 &#8594; change the position to X=1, Y=0, Z=0 &#8594; change the rotation to X=0, Z=-90, Z =0 &#8594; go to the Canvas component &#8594; click the dropdown <strong>Render Mode</strong> &#8594; select "World Space"</div><br />
+		<div class="sbo"><strong>5:</strong> open the text GameObject in the Inspektor &#8594; go to <strong>Rect Transform</strong> &#8594; change Width = 1000, Height = 1000, change Scale to X=0.1, Y=0.1, Z=1 &#8594; go to <strong>Text(Script)</strong> &#8594; change <strong>Font Size</strong> to 50 &#8594; change the <strong>color</strong> to white </div><br />
+
+		We will implement a script now, that allows the user to click on any datapoint. Whenever the user clicks on a datapoint, the Information Board should show all informations about this point.  
+		To access the Text component of our information board within a script, we should tag it first.
+		
+		<div class="sbo"><strong>6:</strong> open the Text GameObject in the Inspector &#8594; click <strong>Tag</strong> &#8594; <strong>add Tag</strong> &#8594; press <strong>+</strong> &#8594; write in “Infotext” &#8594; chose Infotext within the dropdown as the Tag for this GameObject</div><br />
+		<div class="sbo"><strong>7:</strong> creat a new script &#8594; name it "InteractionDatapoint"</div><br/>
+
+		We will use a script with the Unity built-in <code>OnMouseDown</code> function, that is called when the user clicks on a GameObject. The function creates a new string, fill it with the information of a given datapoint and overwrite the text component of the GameObject with the “Infotext” tag.
+		
+				<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;max-width:800px ;max-height:500px;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008000; font-weight: bold">using</span> <span style="color: #0000FF; font-weight: bold">System.Collections</span>;
+		<span style="color: #008000; font-weight: bold">using</span> <span style="color: #0000FF; font-weight: bold">System.Collections.Generic</span>;
+		<span style="color: #008000; font-weight: bold">using</span> <span style="color: #0000FF; font-weight: bold">UnityEngine</span>;
+		<span style="color: #008000; font-weight: bold">using</span> <span style="color: #0000FF; font-weight: bold">UnityEngine.UI</span>;
+
+		<span style="color: #008000; font-weight: bold">public</span> <span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">InteractionDatapoint</span> : MonoBehaviour {
+
+			<span style="color: #008000; font-weight: bold">public</span> DataPoint datapoint;
+			<span style="color: #008000; font-weight: bold">private</span> <span style="color: #B00040">string</span> newInfoText;
+
+			<span style="color: #408080; font-style: italic">//OnMouseDown is called, when the mouse button is prssed while the curser in on a GameObject</span>
+			<span style="color: #008000; font-weight: bold">void</span> <span style="color: #0000FF">OnMouseDown</span>()
+			{
+				newInfoText = <span style="color: #BA2121">&quot;&quot;</span>;
+				<span style="color: #408080; font-style: italic">//write a string with all labels and values</span>
+				<span style="color: #008000; font-weight: bold">for</span> (<span style="color: #B00040">var</span> a = <span style="color: #666666">0</span>; a &lt; datapoint.labelList.Count; a++)
+				{
+					newInfoText += datapoint.labelList[a] + <span style="color: #BA2121">&quot; :\t&quot;</span> + datapoint.valueList[a] +<span style="color: #BA2121">&quot;\n&quot;</span>;
+				}
+				
+				<span style="color: #408080; font-style: italic">//look for the GameObject with tag &quot;Infotext&quot;, change the text from its Text component</span>
+				GameObject.FindWithTag(<span style="color: #BA2121">&quot;Infotext&quot;</span>).GetComponent&lt;Text&gt;().text = newInfoText;
+			}
+		}
+		</pre></div>
+
+		
+		We need to attach this script to every datapoint GameObject and set the public DataPoint variable to the correct reference. We do this by adding the following two lines to the <code>SpawnDataPoint</code> function in our "PlotData.cs" script. 
+		Finally, we should move the "Main Camera" GameObject to get a better look on the coordinate system, while we interact with the data.
+
+		<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;max-width:800px ;max-height:500px;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">        DataPoint.AddComponent&lt;InteractionDatapoint&gt;();
+        DataPoint.GetComponent&lt;InteractionDatapoint&gt;().datapoint = dat;
+</pre></div>
+
+
+		
+		<div class="sbo"><strong>8:</strong> open "Main Camera" in the Inspector &#8594; change its position to X=1.25, Y= 1.5 Z=-1.4 &#8594; change its rotation to X=0, Y=-60, Z=0</div><br />
+		<div class="sbo"><strong>9:</strong> hit the <strong>play button</strong> &#8594; click on some datapoints</div><br />
+
+		<iframe width="560" height="315" class="video" src="https://www.youtube.com/embed/idOi30fzAWA" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+	</div>
+</section>
+
+</body>
+</html>

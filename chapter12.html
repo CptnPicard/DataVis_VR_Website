@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Chapter 12</title>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no">
+<link rel="icon" href="images/favicon.ico">
+<link rel="shortcut icon" href="images/favicon.ico">
+<link rel="stylesheet" href="css/stuck.css">
+<link rel="stylesheet" href="css/form.css">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/jquery.js"></script>
+<script src="js/jquery-migrate-1.1.1.js"></script>
+<script src="js/script.js"></script>
+<script src="js/superfish.js"></script>
+<script src="js/jquery.equalheights.js"></script>
+<script src="js/jquery.mobilemenu.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<script src="js/tmStickUp.js"></script>
+<script src="js/modal.js"></script>
+<script src="js/TMForm.js"></script>
+<script src="js/jquery.ui.totop.js"></script>
+<script>
+ $(document).ready(function(){
+  $().UItoTop({ easingType: 'easeOutQuart' });
+  $('#stuck_container').tmStickUp({});
+});
+</script>
+<!--[if lt IE 9]>
+ <div style=' clear: both; text-align:center; position: relative;'>
+   <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+     <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
+   </a>
+</div>
+<script src="js/html5shiv.js"></script>
+<link rel="stylesheet" media="screen" href="css/ie.css">
+<![endif]-->
+</head>
+<body id="top">
+<!--==============================
+              header
+=================================-->
+<header>
+<!--==============================
+            Stuck menu
+=================================-->
+  <section id="stuck_container">
+    <div class="container">
+      <div class="row">
+        <div class="grid_12">
+        <h1>
+          <a href="index.html">
+            <img src="images/logo.png" alt="Logo alt">
+          </a>
+        </h1>
+          <div class="navigation ">
+            <nav>
+              <ul class="sf-menu">
+               <li class="current"><a href="index.html">Tutorial</a></li>
+               <li><a href="downloads.html">Downloads</a></li>
+                <li><a href="helpfullinks.html">Helpful Links</a></li>
+			   <li><a href="about.html">About</a></li>
+             </ul>
+            </nav>
+            <div class="clear"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</header>
+<!--=====================
+          Content
+======================-->
+<section class="content"><div class="ic"></div>
+  <div class="container">
+    <div class="row">
+      <div class="grid_12">
+        <h3 class="ta__center">12: Implementing VR</h3>
+      </div>
+	</div>
+	<div class="grid_12">
+	<h5>12.1: Implementing the Oculus Rift</h5>
+	
+	It's time to experience our project in Virtual Reality. For this tutorial we use the Oculus Rift CV1. Setup the Oculus Rift now. An installation guide can be found here. The Oculus software can be downloaded here. Follow the given instructions and start the Oculus Software. Unity will support VR for the Oculus only while the Oculus software is running.
+	We now can enable the VR mode, that is implemented in Unity. The VR mode allows us to spectate our project through the Oculus Rift. <br/>
+	<div class="sbo"><strong>1:</strong> open the Oculus Software - click the settings icon in the right top - click settings - click General - enable Unknown Sources </div><br/>
+	<div class="sbo"><strong>2:</strong>  go into unity - click on <strong>Edit</strong> - <strong>Project Settings</strong> - <strong>Player</strong> - go to XR settings in the Inspector - choose Virtual Reality Support - hit <strong>play</strong> </div><br/>
+	
+	<h5>12.2:Implementing the Oculus Touch</h5>
+	While we are using the Oculus Rift, our mouse interaction is disabled. The technically most progressive approach to replace the mouse interaction is to implement the Oculus Touch controller. The implementation of functional usable Oculus Touch controllers requires quite some work and would be beyond the scope of this tutorial if it’s done completely on our own. Fortunately, there are some free toolkits, that can simplify the task. We will download two free toolkits from the Asset Store and implement a visualization of hands and controllers in our project.<br/> 
+	<div class="sbo"><strong>1:</strong> open the tap Asset Store &#8594; search for “VRTK” &#8594; click on VRTK - Virtual Reality Toolkit [VR Toolkit] &#8594; click on <strong>Download</strong> &#8594;  <strong>Import</strong> &#8594; click <strong>Import</strong> within the popup </div><br/>
+	<div class="sbo"><strong>2:</strong> search for “Oculus Integration” &#8594; click on “Oculus Integration” &#8594; download it &#8594; import it (! this can take up to 15 min) </div><br/>
+	Next, we set up an Oculus VR CameraRig and  an Oculus VR Avatar to implement an representation for our hands and the Oculus Touch controllers. We will use some VRTK scripts to simplify this job. More Informations about the VRTK toolkit can be found here.<br/>
+	<div class="sbo"><strong>3:</strong> create a new Empty GameObject &#8594; rename it “VR Manager” &#8594; create an Empty GameObject as a child of “VR Manager” &#8594; rename it “VRTK Setup” </div><br/>
+	<div class="sbo"><strong>4:</strong> open “VR Manager” in the Inspector &#8594; click <strong>Add Component</strong> &#8594; search for “VRTK_SDK Manager” &#8594; add it as a component </div><br/>
+	<div class="sbo"><strong>5:</strong> open “VRTK Setup” in the Inspector &#8594; click <strong>Add Component</strong> &#8594; search for “VRTK_SDK Setup” &#8594; add it as a component </div><br/>
+	<div class="sbo"><strong>6:</strong> go into the project explorer &#8594; OVR &#8594; Prefabs &#8594; drag and drop “OVR CameraRig” onto the “VRTK Setup” GameObject in the Hierarchy </div><br/>
+	<div class="sbo"><strong>7:</strong> go to the OvrAvater folder &#8594; <strong>Content</strong> &#8594; <strong>Prefabs</strong> &#8594; drag and drop “LocalAvatar” onto the “VRTK” GameObject in the Hierarchy </div><br/>
+	<div class="sbo"><strong>8:</strong> open VRTK Setup in Inspector &#8594; choose “Oculus” in the SDK Selection dropdownmenu </div><br/>
+	<div class="sbo"><strong>9:</strong> open VR Manager in the Inspector &#8594; go to Setups &#8594; click <strong>+</strong> &#8594; click on the round symbol &#8594; choose “VRTK Setup” in the popup window </div><br/>
+	<div class="sbo"><strong>10:</strong> open the OvrAvater GameObject in the Inspector &#8594; enable start with controller </div><br/>
+	<div class="sbo"><strong>11:</strong> delete the “Main Camera” GameObject in the Hierarchy &#8594; hit play and use the controllers </div><br/>
+	We should add some functionality to our new hands. We will implement a laser pointer, that points straight out of our right controller. The VRTK toolkit provides some helpful script to do this.<br/>
+	<div class="sbo"><strong>12:</strong> create a new Empty Gameobject as a child of VR Manager &#8594; rename it “Right Controller” </div><br/>
+	<div class="sbo"><strong>13:</strong> open “Right Controller” in the Inspector &#8594; add the component “VRTK_Controller Events” &#8594; add the component “VRTK_Pointer” &#8594; add the component “VTRK_Straight Pointer Renderer” </div><br/>
+	<div class="sbo"><strong>14:</strong> drag and drop the “VRTK_Straight Pointer Renderer” component to “Pointer Renderer” in the “VRTK_Pointer Component” &#8594; change the Activation Button  under Pointer Activation Settings to “Undefined” &#8594; enable “Activate On Enable” - set selection Button to "Button One Press"</div><br/>
+	<div class="sbo"><strong>14:</strong> open "VR Manager" in the Spectator - drag and drop the "Right Controller" into Script Aliases/Right Controller </div><br/>
+	<div class="sbo"><strong>15:</strong> hit play &#8594; test the pointer </div><br/>
+	We would like to interact with the GameObject that our pointer hits. To implement this functionality we will need to add some more scripts.<br/>
+	<div class="sbo"><strong>16:</strong> add a “VRTK_UI Pointer” component to the GameObject “Right Controller” &#8594; set Activation Button to “Undefined” &#8594; set Activation Mode to “Always” </div><br/>
+	<div class="sbo"><strong>17:</strong> open the child “Canvas” of “Data Menu” in the Inspector &#8594; add a “VRTK_UI Canvas” component </div><br/>
+	<div class="sbo"><strong>18:</strong> hit play &#8594; test the data menu </div><br/>
+	Now we can interact with the Data Menu and make new plots. The dropdowns might cause some issues sometimes - I couldn't find a solution for these issues yet.
+	The last thing we need to implement for the touch controllers is an option to interact with the data points. Therefore we need to add another two components to the “Right Controller”, change the "Interaction_DataPoint.cs" and "PlotData.cs" script.<br/>
+	<div class="sbo"><strong>19:</strong> open “Right Controller” in the Inspector &#8594; add the component “VRTK_Interact Use” &#8594; change Use Button to “Button One Press” &#8594; go to the “VRTK_Pointer” component &#8594; enable “Interact With Objects” &#8594; add the VRTK_InteractTouch component</div><br/>
+
+	<div class="sbo"><strong>20:</strong> open the “Interaction_DataPoint.cs” script &#8594; delete its content &#8594; copy past the new script &#8594; safe </div><br/>
+			<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;max-width:800px ;max-height:500px;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008000; font-weight: bold">using</span> <span style="color: #0000FF; font-weight: bold">System.Collections</span>;
+		<span style="color: #008000; font-weight: bold">using</span> <span style="color: #0000FF; font-weight: bold">System.Collections.Generic</span>;
+		<span style="color: #008000; font-weight: bold">using</span> <span style="color: #0000FF; font-weight: bold">UnityEngine</span>;
+		<span style="color: #008000; font-weight: bold">using</span> <span style="color: #0000FF; font-weight: bold">UnityEngine.UI</span>;
+		<span style="color: #008000; font-weight: bold">using</span> <span style="color: #0000FF; font-weight: bold">VRTK</span>;
+
+		<span style="color: #008000; font-weight: bold">public</span> <span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">InteractionDatapoint</span> : VRTK_InteractableObject
+		{
+
+			<span style="color: #008000; font-weight: bold">public</span> DataPoint datapoint;
+			<span style="color: #008000; font-weight: bold">private</span> <span style="color: #B00040">string</span> newInfoText;
+
+
+			<span style="color: #008000; font-weight: bold">public</span> <span style="color: #008000; font-weight: bold">override</span> <span style="color: #008000; font-weight: bold">void</span> <span style="color: #0000FF">StartUsing</span>(VRTK_InteractUse usingObject)
+			{
+				newInfoText = <span style="color: #BA2121">&quot;&quot;</span>;
+				<span style="color: #408080; font-style: italic">//write a string with all labels and values</span>
+				<span style="color: #008000; font-weight: bold">for</span> (<span style="color: #B00040">var</span> a = <span style="color: #666666">0</span>; a &lt; datapoint.labelList.Count; a++)
+				{
+					newInfoText += datapoint.labelList[a] + <span style="color: #BA2121">&quot; :\t&quot;</span> + datapoint.valueList[a] + <span style="color: #BA2121">&quot;\n&quot;</span>;
+				}
+
+				<span style="color: #408080; font-style: italic">//look for the GameObject with tag &quot;Infotext&quot;, change the text from its Text component</span>
+				GameObject.FindWithTag(<span style="color: #BA2121">&quot;Infotext&quot;</span>).GetComponent&lt;Text&gt;().text = newInfoText;
+			}
+
+			<span style="color: #008000; font-weight: bold">public</span> <span style="color: #008000; font-weight: bold">override</span> <span style="color: #008000; font-weight: bold">void</span> <span style="color: #0000FF">StopUsing</span>(VRTK_InteractUse usingObject)
+			{
+				<span style="color: #008000; font-weight: bold">base</span>.StopUsing(usingObject);
+			}
+
+
+		}
+		</pre></div>
+
+	<div class="sbo"><strong>21:</strong> open the “PlotData.cs” script &#8594; go to the SpawnDataPoint() function &#8594; add the following line </div><br/>
+
+			  <!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;max-width:800px ;max-height:500px;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"> DataPoint.GetComponent&lt;InteractionDatapoint&gt;().isUsable = <span style="color: #008000; font-weight: bold">true</span>;
+		</pre></div>
+
+
+	<div class="sbo"><strong>22:</strong> hit play &#8594; test all functions </div><br/>
+	Finally we can export and test the finished project:<br/>
+	<div class="sbo"><strong>23:</strong> click File &#8594; Build and Run </div><br/>
+
+
+	<iframe width="560" height="315" class="video" src="https://www.youtube.com/embed/hmBDo5pipvw" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+	</div>
+</section>
+
+</body>
+</html>

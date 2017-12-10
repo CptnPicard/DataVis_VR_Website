@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Chapter 8</title>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no">
+<link rel="icon" href="images/favicon.ico">
+<link rel="shortcut icon" href="images/favicon.ico">
+<link rel="stylesheet" href="css/stuck.css">
+<link rel="stylesheet" href="css/form.css">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/jquery.js"></script>
+<script src="js/jquery-migrate-1.1.1.js"></script>
+<script src="js/script.js"></script>
+<script src="js/superfish.js"></script>
+<script src="js/jquery.equalheights.js"></script>
+<script src="js/jquery.mobilemenu.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<script src="js/tmStickUp.js"></script>
+<script src="js/modal.js"></script>
+<script src="js/TMForm.js"></script>
+<script src="js/jquery.ui.totop.js"></script>
+<script>
+ $(document).ready(function(){
+  $().UItoTop({ easingType: 'easeOutQuart' });
+  $('#stuck_container').tmStickUp({});
+});
+</script>
+<!--[if lt IE 9]>
+ <div style=' clear: both; text-align:center; position: relative;'>
+   <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+     <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
+   </a>
+</div>
+<script src="js/html5shiv.js"></script>
+<link rel="stylesheet" media="screen" href="css/ie.css">
+<![endif]-->
+</head>
+<body id="top">
+<!--==============================
+              header
+=================================-->
+<header>
+<!--==============================
+            Stuck menu
+=================================-->
+  <section id="stuck_container">
+    <div class="container">
+      <div class="row">
+        <div class="grid_12">
+        <h1>
+          <a href="index.html">
+            <img src="images/logo.png" alt="Logo alt">
+          </a>
+        </h1>
+          <div class="navigation ">
+            <nav>
+              <ul class="sf-menu">
+               <li class="current"><a href="index.html">Tutorial</a></li>
+               <li><a href="downloads.html">Downloads</a></li>
+               <li><a href="helpfullinks.html">Helpful Links</a></li>
+			   <li><a href="about.html">About</a></li>
+             </ul>
+            </nav>
+            <div class="clear"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</header>
+<!--=====================
+          Content
+======================-->
+<section class="content"><div class="ic"></div>
+  <div class="container">
+    <div class="row">
+      <div class="grid_12">
+        <h3 class="ta__center">8. Creating Axis</h3>
+      </div>
+	</div>
+	<div class="grid_12">
+	<h5>8.1 Creating Axis</h5>
+		Before we can visualize the actual data, we should create some axis for our coordinate system. We will write another C# script, that is able to spawn some GameObjects to represent axis and labels.<br/>
+		<div class="sbo"><strong>1:</strong> creat a new C# script in the "Scripts" folder &#8594; name it "Axis" &#8594; attach it to the GameObject “Data Manager” </div><br />
+		The "Axis.cs" script provides the function <code>SpawnCoSystem</code> that will create axis and labels for the xy-, xz- and yz-plane. The function takes an integer for the maximum number of axis per plane and three elements out of the <code>dataSetLabels</code> list from the "DataSet.cs" script. The three elements define, which row in our dataset should be visualized in which dimension.
+		The function <code>SpawnCoSystem</code> is calling <code>ScaleAxis</code>, to map the values in a row of our dataset to a relativ position value between 0 and 1. 
+		these position values are passed to the function <code>SpawnAxis</code>, that is called several times for each plane in the coordinate system. <code>SpawnAxis</code> creates a new GameObject and change its position and shape on a way, that it looks like an axis line. The function takes three parameters to define in what direction, in which plane and where a new axis should get created. A fourth string parameter is required to call the function <code>AddTextMesh</code> after creating an axis. <code>AddTextMesh</code> will create a TextMesh GameObject with the given string, representing the label of the axis.  
+
+							<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;max-width:800px ;max-height:500px;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008000; font-weight: bold">using</span> <span style="color: #0000FF; font-weight: bold">System.Collections</span>;
+			<span style="color: #008000; font-weight: bold">using</span> <span style="color: #0000FF; font-weight: bold">System.Collections.Generic</span>;
+			<span style="color: #008000; font-weight: bold">using</span> <span style="color: #0000FF; font-weight: bold">UnityEngine</span>;
+			<span style="color: #008000; font-weight: bold">using</span> <span style="color: #0000FF; font-weight: bold">System</span>;
+
+			<span style="color: #008000; font-weight: bold">public</span> <span style="color: #008000; font-weight: bold">class</span> <span style="color: #0000FF; font-weight: bold">Axis</span> : MonoBehaviour
+			{
+
+				<span style="color: #008000; font-weight: bold">public</span> DataSet dataSet;
+
+				<span style="color: #008000; font-weight: bold">public</span> Dictionary&lt;<span style="color: #B00040">string</span>, <span style="color: #B00040">float</span>&gt; xDict;
+				<span style="color: #008000; font-weight: bold">public</span> Dictionary&lt;<span style="color: #B00040">string</span>, <span style="color: #B00040">float</span>&gt; yDict;
+				<span style="color: #008000; font-weight: bold">public</span> Dictionary&lt;<span style="color: #B00040">string</span>, <span style="color: #B00040">float</span>&gt; zDict;
+
+
+				<span style="color: #408080; font-style: italic">//function SpawnFullCoordinateSystem:</span>
+				<span style="color: #408080; font-style: italic">//calls function SpawnAxis to creat axis in all three planes</span>
+				<span style="color: #008000; font-weight: bold">public</span> <span style="color: #008000; font-weight: bold">void</span> <span style="color: #0000FF">SpawnCoSystem</span>(<span style="color: #B00040">int</span> axisPerPlane, <span style="color: #B00040">string</span> xlabel, <span style="color: #B00040">string</span> ylabel, <span style="color: #B00040">string</span> zlabel)
+				{
+					xDict = ScaleAxis(xlabel);
+					yDict = ScaleAxis(ylabel);
+					zDict = ScaleAxis(zlabel);
+
+					<span style="color: #B00040">int</span> skipX = Convert.ToInt32(xDict.Count / axisPerPlane);
+					<span style="color: #B00040">int</span> skipY = Convert.ToInt32(yDict.Count / axisPerPlane);
+					<span style="color: #B00040">int</span> skipZ = Convert.ToInt32(zDict.Count / axisPerPlane);
+
+					<span style="color: #B00040">int</span> counter = <span style="color: #666666">0</span>;
+					<span style="color: #008000; font-weight: bold">foreach</span> (<span style="color: #B00040">string</span> key <span style="color: #008000; font-weight: bold">in</span> xDict.Keys)
+					{
+						<span style="color: #008000; font-weight: bold">if</span> (counter == skipX)
+						{
+							SpawnAxis(<span style="color: #BA2121">&quot;X&quot;</span>, <span style="color: #BA2121">&quot;XZ-Plane&quot;</span>, xDict[key], key);
+							counter = <span style="color: #666666">0</span>;
+						}
+						<span style="color: #008000; font-weight: bold">else</span>
+						{
+							counter += <span style="color: #666666">1</span>;
+						}
+					}
+
+					counter = <span style="color: #666666">0</span>;
+					<span style="color: #008000; font-weight: bold">foreach</span> (<span style="color: #B00040">string</span> key <span style="color: #008000; font-weight: bold">in</span> yDict.Keys)
+					{
+						<span style="color: #008000; font-weight: bold">if</span> (counter == skipY)
+						{
+							SpawnAxis(<span style="color: #BA2121">&quot;Y&quot;</span>, <span style="color: #BA2121">&quot;XY-Plane&quot;</span>, yDict[key], key);
+							SpawnAxis(<span style="color: #BA2121">&quot;Y&quot;</span>, <span style="color: #BA2121">&quot;YZ-Plane&quot;</span>, yDict[key], key);
+							counter = <span style="color: #666666">0</span>;
+						}
+						<span style="color: #008000; font-weight: bold">else</span>
+						{
+							counter += <span style="color: #666666">1</span>;
+						}
+					}
+
+					counter = <span style="color: #666666">0</span>;
+					<span style="color: #008000; font-weight: bold">foreach</span> (<span style="color: #B00040">string</span> key <span style="color: #008000; font-weight: bold">in</span> zDict.Keys)
+					{
+						<span style="color: #008000; font-weight: bold">if</span> (counter == skipZ)
+						{
+							SpawnAxis(<span style="color: #BA2121">&quot;Z&quot;</span>, <span style="color: #BA2121">&quot;XZ-Plane&quot;</span>, zDict[key], key);
+							counter = <span style="color: #666666">0</span>;
+						}
+						<span style="color: #008000; font-weight: bold">else</span>
+						{
+							counter += <span style="color: #666666">1</span>;
+						}
+					}
+
+
+				}
+
+				<span style="color: #408080; font-style: italic">//funtion SpawnAxis</span>
+				<span style="color: #408080; font-style: italic">//creat one GameObject, that represents an axis and one GameObject by calling AddTextMesh</span>
+				<span style="color: #408080; font-style: italic">//the orientation is given through the string coordinate, the position through the</span>
+				<span style="color: #408080; font-style: italic">//string plane and the float position. </span>
+				<span style="color: #008000; font-weight: bold">public</span> <span style="color: #008000; font-weight: bold">void</span> <span style="color: #0000FF">SpawnAxis</span>(<span style="color: #B00040">string</span> coordinate, <span style="color: #B00040">string</span> plane, <span style="color: #B00040">float</span> position, <span style="color: #B00040">string</span> label)
+				{
+					<span style="color: #408080; font-style: italic">//creat a new GameObject axis, name and tag it</span>
+					GameObject Axis = GameObject.CreatePrimitive(PrimitiveType.Cube);
+					Axis.transform.name = <span style="color: #BA2121">&quot;Axis&quot;</span>;
+					Axis.tag = <span style="color: #BA2121">&quot;Axis&quot;</span>;
+
+					<span style="color: #408080; font-style: italic">//look for a GameObject named like string plane, set it as parent</span>
+					Axis.transform.parent = GameObject.Find(plane).transform;
+
+					<span style="color: #408080; font-style: italic">//color axis</span>
+					Renderer rend = Axis.GetComponent&lt;Renderer&gt;();
+					rend.material.color = <span style="color: #008000; font-weight: bold">new</span> Color(<span style="color: #666666">1</span>, <span style="color: #666666">0</span>, <span style="color: #666666">0</span>, <span style="color: #666666">0</span>);
+
+					<span style="color: #408080; font-style: italic">//set acis Transform and call AddTextMesh depeding on plane and coordinate</span>
+					Vector3 scalePlane = GameObject.Find(plane).transform.localScale;
+					<span style="color: #008000; font-weight: bold">if</span> (coordinate == <span style="color: #BA2121">&quot;Z&quot;</span>)
+					{
+						Axis.transform.localScale = <span style="color: #008000; font-weight: bold">new</span> Vector3(scalePlane.x, <span style="color: #666666">0.01f</span>, <span style="color: #666666">0.01f</span>);
+						AddTextMesh(label, Axis, <span style="color: #666666">1</span>, <span style="color: #666666">0</span>, TextAnchor.UpperLeft);
+					}
+					<span style="color: #008000; font-weight: bold">if</span> (coordinate == <span style="color: #BA2121">&quot;Y&quot;</span>)
+					{
+						<span style="color: #008000; font-weight: bold">if</span> (plane == <span style="color: #BA2121">&quot;XY-Plane&quot;</span>)
+						{
+							Axis.transform.localScale = <span style="color: #008000; font-weight: bold">new</span> Vector3(scalePlane.x, <span style="color: #666666">0.01f</span>, <span style="color: #666666">0.01f</span>);
+							<span style="color: #408080; font-style: italic">//AddTextMesh(label, Axis,-1, 180, TextAnchor.MiddleRight);</span>
+						}
+						<span style="color: #008000; font-weight: bold">if</span> (plane == <span style="color: #BA2121">&quot;YZ-Plane&quot;</span>)
+						{
+							Axis.transform.localScale = <span style="color: #008000; font-weight: bold">new</span> Vector3(<span style="color: #666666">0.01f</span>, <span style="color: #666666">0.01f</span>, scalePlane.z);
+							AddTextMesh(label, Axis, -<span style="color: #666666">1</span>, -<span style="color: #666666">90</span>, TextAnchor.MiddleRight);
+						}
+					}
+					<span style="color: #008000; font-weight: bold">if</span> (coordinate == <span style="color: #BA2121">&quot;X&quot;</span>)
+					{
+						Axis.transform.localScale = <span style="color: #008000; font-weight: bold">new</span> Vector3(<span style="color: #666666">0.01f</span>, <span style="color: #666666">0.01f</span>, scalePlane.z);
+						AddTextMesh(label, Axis, -<span style="color: #666666">1</span>, -<span style="color: #666666">90</span>, TextAnchor.UpperRight);
+					}
+
+					<span style="color: #008000; font-weight: bold">if</span> (plane == <span style="color: #BA2121">&quot;XY-Plane&quot;</span>)
+					{
+						Axis.transform.localPosition = <span style="color: #008000; font-weight: bold">new</span> Vector3(<span style="color: #666666">0.0f</span>, position - <span style="color: #666666">0.5f</span> * scalePlane.y, <span style="color: #666666">0.0f</span>);
+					}
+					<span style="color: #008000; font-weight: bold">if</span> (plane == <span style="color: #BA2121">&quot;XZ-Plane&quot;</span>)
+					{
+						<span style="color: #008000; font-weight: bold">if</span> (coordinate == <span style="color: #BA2121">&quot;Z&quot;</span>)
+						{
+							Axis.transform.localPosition = <span style="color: #008000; font-weight: bold">new</span> Vector3(<span style="color: #666666">0.0f</span>, <span style="color: #666666">0.0f</span>, position - <span style="color: #666666">0.5f</span> * scalePlane.z);
+						}
+						<span style="color: #008000; font-weight: bold">if</span> (coordinate == <span style="color: #BA2121">&quot;X&quot;</span>)
+						{
+							Axis.transform.localPosition = <span style="color: #008000; font-weight: bold">new</span> Vector3(position - <span style="color: #666666">0.5f</span> * scalePlane.x, <span style="color: #666666">0.0f</span>, <span style="color: #666666">0.0f</span>);
+						}
+					}
+					<span style="color: #008000; font-weight: bold">if</span> (plane == <span style="color: #BA2121">&quot;YZ-Plane&quot;</span>)
+					{
+						Axis.transform.localPosition = <span style="color: #008000; font-weight: bold">new</span> Vector3(<span style="color: #666666">0.0f</span>, position - <span style="color: #666666">0.5f</span> * scalePlane.z, <span style="color: #666666">0.0f</span>);
+					}
+
+
+
+				}
+
+				<span style="color: #408080; font-style: italic">//funtion ScaleAxis:</span>
+				<span style="color: #408080; font-style: italic">//the function takes a list of labels and length for a axis</span>
+				<span style="color: #408080; font-style: italic">//a dictionary links each label with a spcific value betwen 0 and 1</span>
+				<span style="color: #408080; font-style: italic">//the function returns a dicionary that contains the links</span>
+				<span style="color: #008000; font-weight: bold">public</span> Dictionary&lt;<span style="color: #B00040">string</span>, <span style="color: #B00040">float</span>&gt; ScaleAxis(<span style="color: #B00040">string</span> label)
+				{
+					Dictionary&lt;<span style="color: #B00040">string</span>, <span style="color: #B00040">float</span>&gt; scale = <span style="color: #008000; font-weight: bold">new</span> Dictionary&lt;<span style="color: #B00040">string</span>, <span style="color: #B00040">float</span>&gt;();
+					List&lt;<span style="color: #B00040">string</span>&gt; allValues = <span style="color: #008000; font-weight: bold">new</span> List&lt;<span style="color: #B00040">string</span>&gt;();
+					<span style="color: #B00040">float</span> ticDistance;
+					<span style="color: #B00040">int</span> counter = <span style="color: #666666">1</span>;
+
+					<span style="color: #408080; font-style: italic">//add different values once to the list allValues</span>
+					<span style="color: #008000; font-weight: bold">foreach</span> (DataPoint point <span style="color: #008000; font-weight: bold">in</span> dataSet.listDataPoints)
+					{
+						<span style="color: #008000; font-weight: bold">if</span> (!allValues.Contains(point.GetValue(label)))
+						{
+							allValues.Add(point.GetValue(label));
+						}
+
+					}
+
+					<span style="color: #408080; font-style: italic">//sorting all values (if possible) by calling SortStringList</span>
+					<span style="color: #408080; font-style: italic">//mapping a value between 0 and 1 to each value in the list allValues</span>
+					allValues = SortStringList(allValues);
+					ticDistance = <span style="color: #666666">1.0f</span> / (allValues.Count + <span style="color: #666666">1</span>);
+					<span style="color: #008000; font-weight: bold">foreach</span> (<span style="color: #B00040">string</span> <span style="color: #008000; font-weight: bold">value</span> <span style="color: #008000; font-weight: bold">in</span> allValues)
+					{
+						scale.Add(<span style="color: #008000; font-weight: bold">value</span>, counter * ticDistance);
+						counter += <span style="color: #666666">1</span>;
+					}
+					<span style="color: #008000; font-weight: bold">return</span> scale;
+				}
+
+				<span style="color: #408080; font-style: italic">//function AddTextMesh:</span>
+				<span style="color: #408080; font-style: italic">// takes a string, a parent GameObject and a position to creat a textmesh</span>
+				<span style="color: #008000; font-weight: bold">void</span> <span style="color: #0000FF">AddTextMesh</span>(<span style="color: #B00040">string</span> text, GameObject parent, <span style="color: #B00040">float</span> distance, <span style="color: #B00040">float</span> rotationY, TextAnchor anchor)
+				{
+					<span style="color: #408080; font-style: italic">// creating an empty GameObject, adding textMesch component and MeshRenderer</span>
+					<span style="color: #B00040">var</span> label = <span style="color: #008000; font-weight: bold">new</span> GameObject();
+					label.name = <span style="color: #BA2121">&quot;label&quot;</span>;
+					<span style="color: #B00040">var</span> textMesh = label.AddComponent&lt;TextMesh&gt;();
+
+					<span style="color: #408080; font-style: italic">// defining the position and orientation relativ to the given parent</span>
+					textMesh.transform.localRotation = Quaternion.Euler(<span style="color: #666666">0</span>, rotationY, <span style="color: #666666">0</span>);
+					textMesh.anchor = anchor;
+					textMesh.transform.parent = parent.transform;
+					textMesh.transform.localPosition = parent.transform.localScale * <span style="color: #666666">0.5f</span> * distance;
+
+					<span style="color: #408080; font-style: italic">// set the font size</span>
+					textMesh.fontSize = <span style="color: #666666">40</span>;
+					textMesh.characterSize = <span style="color: #666666">0.01f</span>;
+
+					<span style="color: #408080; font-style: italic">// set the text color</span>
+					textMesh.color = Color.white;
+
+					<span style="color: #408080; font-style: italic">// set the text</span>
+					textMesh.text = text;
+				}
+
+				<span style="color: #408080; font-style: italic">//function SortStringList:</span>
+				<span style="color: #408080; font-style: italic">//convert a string list into a float list, sort it, convert it back</span>
+				<span style="color: #008000; font-weight: bold">private</span> List&lt;<span style="color: #B00040">string</span>&gt; SortStringList(List&lt;<span style="color: #B00040">string</span>&gt; stringlist)
+				{
+					<span style="color: #008000; font-weight: bold">try</span>
+					{
+						List&lt;<span style="color: #B00040">float</span>&gt; intList = stringlist.ConvertAll(<span style="color: #B00040">float</span>.Parse);
+						Debug.Log(intList);
+						intList.Sort();
+						stringlist = intList.ConvertAll&lt;<span style="color: #B00040">string</span>&gt;(<span style="color: #008000; font-weight: bold">delegate</span>(<span style="color: #B00040">float</span> i) {<span style="color: #008000; font-weight: bold">return</span> i.ToString(); });
+						<span style="color: #008000; font-weight: bold">return</span> stringlist;
+					}
+					<span style="color: #008000; font-weight: bold">catch</span>
+					{
+						stringlist.Sort();
+						<span style="color: #008000; font-weight: bold">return</span> stringlist;
+
+					}
+				}
+			}
+			</pre></div>
+
+
+
+		To enable the functionality of the axis script, we have to refer an <code>DataSet</code> instance of our DataSet.cs script to the public variable <code>dataSet</code> in the "Axis.cs" script. This can be done by:<br/>
+		<div class="sbo"><strong>2:</strong> open the Data Manager GameObject in the inspector  &#8594; drag and drop “Data Manager” from the Hierarchy into the Data Set field within the Axis (Script) component </div><br/>
+		We should test, if the axis script is running well. We will add a new <code>Start</code> function, where we call the <code>SpawnCoSystem</code> function with some elements from the <code>dataSetLabels</code> list, which are the strings from the first line of our dataset.txt file. <br/>
+		<div class="sbo"><strong>3:</strong> add the Start function to the Axis script &#8594; press the play button &#8594; delete the Start function again</div><br/>
+		 
+				<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;max-width:800px ;max-height:500px;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">  <span style="color: #008000; font-weight: bold">void</span> <span style="color: #0000FF">Start</span>()
+			{
+				SpawnCoSystem(<span style="color: #666666">10</span>, <span style="color: #BA2121">&quot;Name&quot;</span>, <span style="color: #BA2121">&quot;Year&quot;</span>, <span style="color: #BA2121">&quot;Publisher&quot;</span>);
+			}
+</pre></div>
+
+	<iframe width="560" height="315" class="video" src="https://www.youtube.com/embed/mUTvIEoyIpg" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+	</div>
+</section>
+
+</body>
+</html>
