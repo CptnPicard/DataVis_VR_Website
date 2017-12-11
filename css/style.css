@@ -725,6 +725,11 @@ header h1 a img {
     text-decoration: underline;
 }
 
+.link {
+	text-decoration: underline;
+	color: #383636;
+}
+
 /****Map****/
 
 .map {
