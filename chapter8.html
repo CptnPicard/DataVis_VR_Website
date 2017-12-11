@@ -73,9 +73,9 @@
 	</div>
 	<div class="grid_12">
 	<h5>8.1 Creating Axes</h5>
-		Before we can visualize the actual data we should create some axis for our coordinate system. We will write another C# script, that is able to spawn some GameObjects to represent axis and labels.<br/>
+		Before we can visualize the actual data we should create some axes for our coordinate system. We will write another C# script, that is able to spawn some GameObjects to represent axes and labels.<br/>
 		<div class="sbo"><strong>1:</strong> create a new C# script in the "Scripts" folder &#8594; name it "Axis" &#8594; attach it to the GameObject “Data Manager” </div><br />
-		The "Axis.cs" script provides the function <code>SpawnCoSystem</code> that will create axis and labels for the xy-, xz- and yz-plane. The function takes an integer for the maximum number of axis per plane and three elements out of the <code>dataSetLabels</code> list from the "DataSet.cs" script. The three elements define which row in our dataset should be visualized in which dimension.
+		The "Axis.cs" script provides the function <code>SpawnCoSystem</code> that will create axis and labels for the xy-, xz- and yz-plane. The function takes an integer for the maximum number of axes per plane and three elements out of the <code>dataSetLabels</code> list from the "DataSet.cs" script. The three elements define which row in our dataset should be visualized in which dimension.
 		The function <code>SpawnCoSystem</code> is calling <code>ScaleAxis</code> to map the values in a row of our dataset to a relative position value between 0 and 1. 
 		These position values are passed to the function <code>SpawnAxis</code>, that is called several times for each plane in the coordinate system. <code>SpawnAxis</code> creates a new GameObject and change its position and shape in a way that it looks like an axis line. The functnon takes three parameters to define in what direction, in which plane and where a new axis should be created. A fourth string parameter is required to call the function <code>AddTextMesh</code> after creating an axis. <code>AddTextMesh</code> will create a TextMesh GameObject with the given string, representing the label of the axis.  
 
@@ -95,7 +95,7 @@
 
 
 				<span style="color: #408080; font-style: italic">//function SpawnFullCoordinateSystem:</span>
-				<span style="color: #408080; font-style: italic">//calls function SpawnAxis to creat axis in all three planes</span>
+				<span style="color: #408080; font-style: italic">//calls function SpawnAxis to creat axes in all three planes</span>
 				<span style="color: #008000; font-weight: bold">public</span> <span style="color: #008000; font-weight: bold">void</span> <span style="color: #0000FF">SpawnCoSystem</span>(<span style="color: #B00040">int</span> axisPerPlane, <span style="color: #B00040">string</span> xlabel, <span style="color: #B00040">string</span> ylabel, <span style="color: #B00040">string</span> zlabel)
 				{
 					xDict = ScaleAxis(xlabel);
