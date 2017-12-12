@@ -27,14 +27,6 @@
 });
 </script>
 
- <div style=' clear: both; text-align:center; position: relative;'>
-   <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-     <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
-   </a>
-</div>
-<script src="js/html5shiv.js"></script>
-<link rel="stylesheet" media="screen" href="css/ie.css">
-<![endif]-->
 </head>
 <body id="top">
 <!--==============================
@@ -84,8 +76,8 @@
 	In the following section, we will implement a C# script that allows us to load a CSV file into our Unity project. First we will create a new empty GameObject to hold our script as a component, then we will create a new script, attach it to the GameObject and add functionality. <br/>
 	<div class="sbo"><strong>1:</strong> create a new empty GameObject &#8594; rename it “Data Manager” </div> <br />
 	<div class="sbo"><strong>2:</strong> create a new folder within the Assets folder &#8594; name it “Scripts”  </div> <br />
-	<div class="sbo"><strong>3:</strong> go into the “Scripts” folder &#8594; right click &#8594; <strong>Create</strong> &#8594; <strong>C# Script</strong> &#8594; name it "DataSet"</div> <br />
-	<div class="sbo"><strong>4:</strong> drag and drop the new script onto the “Data Manager” GameObject  </div> <br />
+	<div class="sbo"><strong>3:</strong> go into the Scripts folder &#8594; right click &#8594; <strong>Create</strong> &#8594; <strong>C# Script</strong> &#8594; name it "DataSet"</div> <br />
+	<div class="sbo"><strong>4:</strong> drag and drop the new script onto the <go>'Data Manager'</go> GameObject  </div> <br />
 	Now we write the acutal script that loads a CSV file at a given directory. First, we define a new Class <code>Datapoint</code>. DataPoints can store a list of values and a list of labels that defines what the values stand for.
 	The function <code>ReadDataset</code> will open the file and read it line by line. The first line is saved into the public variable <code>dataSetLabels</code>. It should identify what the values in each row stand for. For each other line an instance of the class <code>Datapoint</code> is created and added to the public list <code>listDataPoints</code>. 
 	</div>
@@ -178,8 +170,8 @@
 		}
 		</pre></div>
 	
-		Before we can test the new script, we need a dataset. Your can download an example here. We also have to declare the public string <code>csvFilePath</code>
-		<div class="sbo"><strong>5:</strong> open the GameObject "Data Manager" in the Inspector &#8594; go to Data Set (Script) &#8594; csvFilePath &#8594; write in the file path (for example: C:\user\Desktop\dataset.txt)</div></br>
+		Before we can test the new script, we need a dataset. Your can download an example <a class="link" href="https://github.com/CptnPicard/DataVis-VR/datasets">here</a>. We also have to declare the public string <code>csvFilePath</code>
+		<div class="sbo"><strong>5:</strong> open the GameObject <go>'Data Manager'</go> in the Inspector &#8594; go to Data Set (Script) &#8594; csvFilePath &#8594; write in the file path (for example: C:\user\Desktop\dataset.txt)</div></br>
 		Now we can test the script for errors by hitting the play button above the scene window. There is not too much to see but our dataset is now stored in the public list <code>listDataPoints</code> and we can access it from other scripts.</br>
 		<iframe width="560" height="315" class="video" src="https://www.youtube.com/embed/ZrzuOn4ubDQ" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 	</div>

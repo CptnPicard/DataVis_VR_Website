@@ -74,7 +74,7 @@
 	<div class="grid_12">
 	<h5>8.1 Creating Axes</h5>
 		Before we can visualize the actual data we should create some axes for our coordinate system. We will write another C# script, that is able to spawn some GameObjects to represent axes and labels.<br/>
-		<div class="sbo"><strong>1:</strong> create a new C# script in the "Scripts" folder &#8594; name it "Axis" &#8594; attach it to the GameObject “Data Manager” </div><br />
+		<div class="sbo"><strong>1:</strong> create a new C# script in the Scripts folder &#8594; name it "Axis" &#8594; attach it to the GameObject <go>'Data Manager'</go> </div><br />
 		The "Axis.cs" script provides the function <code>SpawnCoSystem</code> that will create axis and labels for the xy-, xz- and yz-plane. The function takes an integer for the maximum number of axes per plane and three elements out of the <code>dataSetLabels</code> list from the "DataSet.cs" script. The three elements define which row in our dataset should be visualized in which dimension.
 		The function <code>SpawnCoSystem</code> is calling <code>ScaleAxis</code> to map the values in a row of our dataset to a relative position value between 0 and 1. 
 		These position values are passed to the function <code>SpawnAxis</code>, that is called several times for each plane in the coordinate system. <code>SpawnAxis</code> creates a new GameObject and change its position and shape in a way that it looks like an axis line. The functnon takes three parameters to define in what direction, in which plane and where a new axis should be created. A fourth string parameter is required to call the function <code>AddTextMesh</code> after creating an axis. <code>AddTextMesh</code> will create a TextMesh GameObject with the given string, representing the label of the axis.  
@@ -303,8 +303,8 @@
 
 
 
-		To enable the functionality of the axis script we have to refer an <code>DataSet</code> instance of our DataSet.cs script to the public variable <code>dataSet</code> in the "Axis.cs" script. This can be done by:<br/>
-		<div class="sbo"><strong>2:</strong> open the Data Manager GameObject in the inspector  &#8594; drag and drop “Data Manager” from the Hierarchy into the Data Set field within the Axis (Script) component </div><br/>
+		To enable the functionality of the axis script we have to refer an <code>DataSet</code> instance of our "DataSet.cs" script to the public variable <code>dataSet</code> in the "Axis.cs" script. This can be done by:<br/>
+		<div class="sbo"><strong>2:</strong> open the Data Manager GameObject in the inspector  &#8594; drag and drop <go>'Data Manager'</go> from the Hierarchy into the Data Set field within the Axis (Script) component </div><br/>
 		We should test if the axis script is running well. We will add a new <code>Start</code> function, where we call the <code>SpawnCoSystem</code> function with some elements from the <code>dataSetLabels</code> list, which are the strings from the first line of our dataset.txt file. <br/>
 		<div class="sbo"><strong>3:</strong> add the Start function to the Axis script &#8594; press the play button &#8594; delete the Start function again</div><br/>
 		 

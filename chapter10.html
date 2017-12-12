@@ -76,8 +76,8 @@
 		In this section, we will implement an information board. The information board should show us all informations about a selected datapoint. First we have to create a screen and an user interface (UI) GameObject. Unity provides several UI GameObjects like text windows, buttons, dropdown menus etc. Creating an UI element will also create two other GameObject - a Canvas that contains the UI elements and an Event System that handles input based events.  
 		
 		<div class="sbo"><strong>1:</strong> create a new GameObject &#8594; rename it "Info Board" &#8594; resize it to a shape that looks like a screen &#8594; place it next to the Coordinate System </div><br />
-		<div class="sbo"><strong>2:</strong> create a new Material &#8594; choose a dark color &#8594; add it to the "Info Board" GameObject</div><br />
-		<div class="sbo"><strong>3:</strong> right click into <strong>Hierarchy</strong> &#8594; click <strong>UI</strong> &#8594; click <strong>Text</strong> &#8594; drag and drop "Canvas" and "Eventsystem" onto “Info Board”</div><br />
+		<div class="sbo"><strong>2:</strong> create a new Material &#8594; choose a dark color &#8594; add it to the <go>'Info Board'</go> GameObject</div><br />
+		<div class="sbo"><strong>3:</strong> right click into <strong>Hierarchy</strong> &#8594; click <strong>UI</strong> &#8594; click <strong>Text</strong> &#8594; drag and drop <go>'Canvas'</go> and <go>'Eventsystem'</go> onto <go>'Info Board'</go></div><br />
 		<div class="sbo"><strong>4:</strong> open the Canvas GameObject in the Inspector &#8594; go to <strong>Rect Transform</strong> &#8594; change the scale to X =0.01, Y= 0.01, Z=1 &#8594; change the position to X=1, Y=0, Z=0 &#8594; change the rotation to X=0, Z=-90, Z =0 &#8594; go to the Canvas component &#8594; click the dropdown <strong>Render Mode</strong> &#8594; select "World Space"</div><br />
 		<div class="sbo"><strong>5:</strong> open the text GameObject in the Inspector &#8594; go to <strong>Rect Transform</strong> &#8594; change Width = 1000, Height = 1000, change Scale to X=0.1, Y=0.1, Z=1 &#8594; go to <strong>Text(Script)</strong> &#8594; change <strong>Font Size</strong> to 50 &#8594; change the <strong>color</strong> to white </div><br />
 
@@ -116,8 +116,8 @@
 		</pre></div>
 
 		
-		We need to attach this script to every datapoint GameObject and set the public DataPoint variable to the correct reference. We do this by adding the following two lines to the <code>SpawnDataPoint</code> function in our "PlotData.cs" script. 
-		Finally, we should move the "Main Camera" GameObject to get a better look on the coordinate system, while we interact with the data.
+		We need to attach this script to every datapoint GameObject and set the public <code>DataPoint</code> variable to the correct reference. We do this by adding the following two lines to the <code>SpawnDataPoint</code> function in our "PlotData.cs" script. 
+		Finally, we should move the <go>'Main Camera'</go> GameObject to get a better look on the coordinate system, while we interact with the data.
 
 		<!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;max-width:800px ;max-height:500px;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">        DataPoint.AddComponent&lt;InteractionDatapoint&gt;();
         DataPoint.GetComponent&lt;InteractionDatapoint&gt;().datapoint = dat;
@@ -125,7 +125,7 @@
 
 
 		
-		<div class="sbo"><strong>8:</strong> open "Main Camera" in the Inspector &#8594; change its position to X=1.25, Y= 1.5 Z=-1.4 &#8594; change its rotation to X=0, Y=-60, Z=0</div><br />
+		<div class="sbo"><strong>8:</strong> open <go>'Main Camera</go> in the Inspector &#8594; change its position to X=1.25, Y= 1.5 Z=-1.4 &#8594; change its rotation to X=0, Y=-60, Z=0</div><br />
 		<div class="sbo"><strong>9:</strong> hit the <strong>play button</strong> &#8594; click on some datapoints</div><br />
 
 		<iframe width="560" height="315" class="video" src="https://www.youtube.com/embed/idOi30fzAWA" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
